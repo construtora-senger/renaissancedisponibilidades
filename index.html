@@ -5,344 +5,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Renaissance | Escolha de Unidades</title>
   <style>
-
     :root{
-      --bg:#060606;
-      --panel:#111111;
-      --text:#f3eadc;
-      --muted:#bca98f;
-      --line:rgba(201,154,89,.22);
-      --gold:#c99a59;
-      --green:#3ea56d;
-      --red:#b55b5b;
-      --shadow:0 20px 55px rgba(0,0,0,.34);
+      --bg:#f6f2ec;
+      --panel:#fcfaf7;
+      --text:#191512;
+      --muted:#7b6e61;
+      --line:#dbcdbb;
+      --gold:#b28a52;
+      --green:#3c8253;
+      --red:#a35454;
+      --shadow:0 18px 50px rgba(0,0,0,.10);
       --radius:24px;
       --tower-wide-unit:118px;
       --tower-narrow-unit:98px;
     }
     *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Inter,Segoe UI,Arial,sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(201,154,89,.08), transparent 22%),
-        linear-gradient(180deg,#050505 0%, #090909 100%);
-      color:var(--text)
-    }
+    html,body{max-width:100%;overflow-x:hidden} body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-text-size-adjust:100%}
     button,a{font:inherit}
-    .page{
-      max-width:1180px;
-      margin:0 auto;
-      padding:32px 16px 48px;
-      position:relative;
-    }
-    .page::before,.page::after{
-      content:"";
-      position:fixed;
-      top:0;bottom:0;
-      width:18px;
-      pointer-events:none;
-      background:linear-gradient(180deg,rgba(201,154,89,0),rgba(201,154,89,.18),rgba(201,154,89,0));
-      filter:blur(18px);
-      opacity:.45;
-      z-index:0;
-    }
-    .page::before{left:-6px}
-    .page::after{right:-6px}
-    .header{margin-bottom:28px;position:relative;z-index:1}
+    .page{width:100%;max-width:1180px;margin:0 auto;padding:32px 16px 48px}
+    .header{margin-bottom:28px}
     .eyebrow{letter-spacing:.22em;text-transform:uppercase;font-size:12px;color:var(--gold);font-weight:700}
-    h1{
-      margin:12px 0 10px;
-      font-size:clamp(28px,4.6vw,56px);
-      line-height:.94;
-      font-family:Georgia,'Times New Roman',serif;
-      font-weight:600;
-      color:#f7f1e8;
-    }
+    h1{margin:12px 0 10px;font-size:clamp(28px,4.6vw,56px);line-height:.94;font-family:Georgia,'Times New Roman',serif;font-weight:600}
     .lead{margin:0;max-width:760px;color:var(--muted);font-size:18px;line-height:1.6}
-    .tower-wrap{
-      display:grid;
-      grid-template-columns:minmax(0,1.55fr) minmax(300px,.9fr);
-      gap:22px;
-      align-items:start;
-      margin-top:28px;
-      position:relative;
-      z-index:1;
-    }
-    .tower-card,.side-panel,.unit-modal-card{
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255,255,255,.04), transparent 20%),
-        linear-gradient(180deg,#121212,#0b0b0b);
-      border:1px solid rgba(201,154,89,.22);
-      border-radius:28px;
-      box-shadow:var(--shadow);
-    }
-    .tower-card{padding:18px 12px 10px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .tower-wrap{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(300px,.9fr);gap:22px;align-items:start;margin-top:28px;min-width:0}
+    .tower-card,.side-panel,.unit-modal-card{background:linear-gradient(180deg,#fff,#f7f1e8);border:1px solid rgba(0,0,0,.05);border-radius:28px;box-shadow:var(--shadow)}
+    .tower-card{padding:26px;overflow:hidden;min-width:0}
     .tower-tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px;justify-content:center}
-    .tower-tab{
-      padding:12px 18px;
-      border-radius:999px;
-      border:1px solid rgba(201,154,89,.26);
-      background:rgba(255,255,255,.015);
-      cursor:pointer;
-      font-size:12px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      font-weight:700;
-      color:#8f887f;
-      transition:.22s;
-    }
-    .tower-tab.active{
-      background:linear-gradient(180deg,rgba(201,154,89,.18),rgba(201,154,89,.08));
-      border-color:var(--gold);
-      color:#f0d3a0;
-      box-shadow:0 0 0 1px rgba(201,154,89,.08), inset 0 0 0 1px rgba(255,255,255,.02);
-    }
-    .tower-panel{display:none}
-    .tower-panel.active{display:flex;justify-content:center;align-items:center;width:100%}
-    .tower-drawing{display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;margin:0 auto;width:fit-content;--tower-wide-unit:75.225px;--tower-narrow-unit:62.475px}
-    .floor-row{display:flex;align-items:center;justify-content:center;gap:6px;width:100%}
-    .floor-label{
-      width:30px;
-      flex:0 0 30px;
-      text-align:right;
-      color:#c8a870;
-      font-size:9px;
-      font-weight:700;
-      letter-spacing:.10em;
-      text-transform:uppercase;
-      padding-right:3px
-    }
-    .tower-unit{
-      height:36.975px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.08);
-      background:#262626;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      position:relative;
-      cursor:pointer;
-      transition:.2s;
-      font-weight:700;
-      color:#f7f1e9;
-      box-shadow:0 8px 18px rgba(0,0,0,.16);
-    }
-    .floor-row.narrow .tower-unit{width:var(--tower-narrow-unit);min-width:var(--tower-narrow-unit);max-width:var(--tower-narrow-unit);height:34.425px}
+    .tower-tab{padding:12px 18px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--muted);transition:.22s}
+    .tower-tab.active{background:var(--text);border-color:var(--text);color:#fff}
+    .tower-panel{display:none;min-width:0}
+    .tower-panel.active{display:block}
+    .tower-drawing{display:flex;flex-direction:column;gap:8px;align-items:center;--tower-wide-unit:118px;--tower-narrow-unit:98px;width:100%;min-width:0}
+    .floor-row{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;min-width:0}
+    .floor-label{width:36px;flex:0 0 36px;text-align:right;color:#b7a48e;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding-right:4px}
+    .tower-unit{height:58px;border-radius:14px;border:1px solid #d9cfbf;background:#fff;display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;transition:.2s;font-weight:700;color:#1a1612;box-shadow:0 8px 18px rgba(0,0,0,.04)}
+    .floor-row.narrow .tower-unit{width:var(--tower-narrow-unit);min-width:var(--tower-narrow-unit);max-width:var(--tower-narrow-unit);height:54px}
     .floor-row.wide .tower-unit,.floor-row.terrace .tower-unit{width:var(--tower-wide-unit);min-width:var(--tower-wide-unit);max-width:var(--tower-wide-unit)}
-    .floor-row.top .tower-unit:not(.unit-merged){width:var(--tower-narrow-unit);min-width:var(--tower-narrow-unit);max-width:var(--tower-narrow-unit);height:34.425px}
-    .tower-unit.unit-merged{width:182.25px!important;min-width:182.25px!important;max-width:182.25px!important;height:40.5px}
-    .tower-unit .u-dot,.podium-unit .u-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:currentColor}
-    .tower-unit .u-dot{right:6px;top:50%;bottom:auto;transform:translateY(-50%)}
-    .podium-unit .u-dot{right:6px;bottom:6px}
-    .tower-unit .u-num{display:inline-block;padding-right:10px}
+    .floor-row.top .tower-unit:not(.unit-merged){width:var(--tower-narrow-unit);min-width:var(--tower-narrow-unit);max-width:var(--tower-narrow-unit);height:54px}
+    .tower-unit.unit-merged{width:243px!important;min-width:243px!important;max-width:243px!important;height:54px}
+    .tower-unit .u-dot,.podium-unit .u-dot{position:absolute;right:10px;bottom:10px;width:8px;height:8px;border-radius:50%;background:currentColor}
     .tower-unit.av .u-dot,.podium-unit.av .u-dot{color:var(--green)}
     .tower-unit.res .u-dot{color:var(--gold)}
     .tower-unit.sold .u-dot,.podium-unit.sold .u-dot{color:var(--red)}
-    .tower-unit.av{background:#262626;color:#f7f1e9}
-    .tower-unit.res{
-      background:#262321;
-      box-shadow:inset 0 0 0 1px rgba(201,154,89,.55),0 8px 18px rgba(0,0,0,.16)
-    }
-    .tower-unit.sold{background:#2f2b28;color:#96806a}
-    .tower-unit:hover,.tower-unit.is-selected,.podium-unit:hover,.podium-unit.is-selected{
-      transform:translateY(-1px);
-      border-color:var(--gold);
-      box-shadow:0 16px 26px rgba(201,154,89,.12)
-    }
-    .tower-unit--ghost{
-      visibility:visible;
-      pointer-events:none;
-      opacity:1;
-      background:#d2c0a2!important;
-      color:transparent!important;
-      border:1px solid rgba(255,255,255,.26)!important;
-      box-shadow:none!important
-    }
+    .tower-unit.av{background:#fff;color:#1a1612}
+    .tower-unit.res{background:#f8f0df}
+    .tower-unit.sold{background:#ece3d9;color:#7e6e5c}
+    .tower-unit:hover,.tower-unit.is-selected,.podium-unit:hover,.podium-unit.is-selected{transform:translateY(-1px);border-color:var(--gold);box-shadow:0 16px 26px rgba(178,138,82,.16)}
+    .tower-unit--ghost{visibility:visible;pointer-events:none;opacity:1;background:#fff!important;color:transparent!important;border:1px solid #d5c7b6!important;box-shadow:none!important}
     .tower-unit--ghost .u-num,.tower-unit--ghost .u-dot{display:none!important}
-    .terrace-wing{
-      width:28.9px;
-      height:20.4px;
-      border-radius:999px;
-      background:#d2c0a2;
-      border:1px solid rgba(255,255,255,.28)
-    }
+    .terrace-wing{width:34px;height:24px;border-radius:999px;background:#fff;border:1px solid #d5c7b6}
     .ground-row{align-items:flex-end}
-    .podium-wrap{width:min(100%,362.1px);max-width:362.1px;overflow:hidden;border-radius:18px 18px 0 0}
-    .podium-volume{
-      width:100%;
-      height:clamp(61.2px,11.475vw,84.15px);
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255,255,255,.08), transparent 30%),
-        linear-gradient(90deg,#22170f,#322215);
-      border-radius:18px 18px 0 0;
-      box-shadow:inset 0 0 0 1px rgba(201,154,89,.24)
-    }
+    .podium-wrap{width:min(100%,568px);max-width:568px;overflow:hidden;border-radius:18px 18px 0 0}
+    .podium-volume{width:100%;height:clamp(96px,18vw,132px);background:linear-gradient(90deg,#251a12,#332316);border-radius:18px 18px 0 0}
     .podium-strip{width:100%;display:grid;grid-template-columns:74fr 74fr 76fr 120fr 76fr 74fr 74fr;overflow:hidden}
-    .podium-unit{
-      min-width:0;
-      width:100%;
-      height:36.975px;
-      border:1px solid rgba(201,154,89,.20);
-      background:#141414;
-      color:#f1dfc1;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:11px;
-      font-weight:700;
-      padding:4px;
-      text-align:center;
-      position:relative;
-      cursor:pointer
-    }
+    .podium-unit{min-width:0;width:100%;height:58px;border:1px solid #6f5c47;background:#faf5ee;color:#1a1612;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;padding:4px;text-align:center;position:relative;cursor:pointer}
     .podium-unit span{display:block;width:100%;overflow-wrap:anywhere;word-break:normal}
-    .podium-static{cursor:default;background:#181818;color:#8f785c}
-    .podium-unit.sold{background:#2e2925!important;color:#af9170!important;border-color:rgba(201,154,89,.18)!important}
-    .legend{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;margin-top:10px;color:#dfd2c1;font-size:11px}
-    .lg{display:flex;align-items:center;gap:6px}
-    .dot{width:8px;height:8px;border-radius:50%}
-    .side-panel{
-      padding:24px;
-      position:sticky;
-      top:24px;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255,255,255,.05), transparent 22%),
-        linear-gradient(180deg,#151515,#0d0d0d);
-    }
-    .tag{
-      display:inline-flex;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(201,154,89,.10);
-      color:#dcb780;
-      font-size:11px;
-      font-weight:700;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      border:1px solid rgba(201,154,89,.18)
-    }
-    .side-panel h3,.unit-modal-card h3{
-      margin:16px 0 8px;
-      font-family:Georgia,'Times New Roman',serif;
-      font-size:56px;
-      line-height:.95;
-      color:#f8f1e6;
-    }
-    .unit-modal-card h3{font-size:47.04px}
-    .kind{font-size:24px;font-family:Georgia,'Times New Roman',serif;margin-bottom:6px;color:#f0e1cc}
-    .unit-modal-card .kind{font-size:20.16px;margin-bottom:4.8px}
-    .unit-modal-card .sub{font-size:13.44px;margin-bottom:15.12px}
-    .unit-modal-card .tag{padding:6.72px 10.08px;font-size:9.24px}
-    .unit-modal-card .detail-list{gap:8.4px;margin:15.12px 0 18.48px}
-    .unit-modal-card .detail-list div{padding:10.08px 0}
-    .unit-modal-card .detail-list span{font-size:13.44px}
-    .unit-modal-card .detail-list strong{font-size:14.28px}
-    .unit-modal-card .price small{font-size:13.44px;margin-bottom:6.72px}
-    .unit-modal-card .price strong{font-size:28.56px}
-    .unit-modal-card .price-note{font-size:10.92px;margin-top:6.72px}
-    .unit-modal-card .btn-row{gap:10.08px;margin-top:15.12px}
-    .unit-modal-card .btn{padding:11.76px 15.12px;font-size:10.08px}
-    .unit-modal-card .btn-row .btn{flex:1 1 calc(50% - 10px)}
+    .podium-static{cursor:default;background:#f1e6d8;color:#6a5846}
+    .podium-unit.sold{background:#dfdbd5!important;color:#17130f!important;border-color:#d1c5b5!important}
+    .legend{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:18px;color:var(--muted);font-size:14px}
+    .lg{display:flex;align-items:center;gap:8px}
+    .dot{width:10px;height:10px;border-radius:50%}
+    .side-panel{padding:24px;position:sticky;top:24px}
+    .tag{display:inline-flex;padding:8px 12px;border-radius:999px;background:#efe7dc;color:#6f5f50;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+    .side-panel h3,.unit-modal-card h3{margin:16px 0 8px;font-family:Georgia,'Times New Roman',serif;font-size:56px;line-height:.95}
+    .kind{font-size:24px;font-family:Georgia,'Times New Roman',serif;margin-bottom:6px}
     .sub{color:var(--muted);font-size:16px;margin-bottom:18px}
     .detail-list{display:grid;gap:10px;margin:18px 0 22px}
-    .detail-list div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid rgba(201,154,89,.14)}
+    .detail-list div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid #eadfce}
     .detail-list span{color:var(--muted)}
-    .detail-list strong{text-align:right;color:#f7eddf}
+    .detail-list strong{text-align:right}
     .price small{display:block;color:var(--muted);margin-bottom:8px}
-    .price strong{font-size:34px;line-height:1.05;letter-spacing:-.03em;color:#f6ecd9}
+    .price strong{font-size:34px;line-height:1.05;letter-spacing:-.03em}
     .price-note{margin-top:8px;color:var(--muted);font-size:13px}
-    .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:14px 18px;
-      border-radius:999px;
-      border:1px solid transparent;
-      text-decoration:none;
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      transition:.22s
-    }
-    .btn-primary{
-      background:linear-gradient(90deg,#c89a57 0%, #e0b777 50%, #c69753 100%);
-      color:#17120d
-    }
+    .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.btn-row--single .btn{width:100%}.btn-disabled{background:#eee6dc!important;border-color:#d8cab8!important;color:#8b7b69!important;pointer-events:none;cursor:default}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 18px;border-radius:999px;border:1px solid transparent;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:.22s}
+    .btn-primary{background:var(--gold);color:#fff}
     .btn-primary:hover{filter:brightness(1.03);transform:translateY(-1px)}
-    .btn-light{
-      background:rgba(255,255,255,.02);
-      border-color:rgba(201,154,89,.24);
-      color:#efcf9b
-    }
+    .btn-light{background:#fff;border-color:var(--line);color:var(--text)}
     .unit-modal{position:fixed;inset:0;display:none;z-index:50}
-    .unit-modal.open{display:flex;align-items:center;justify-content:center;padding:20px}
-    .backdrop{position:absolute;inset:0;background:rgba(0,0,0,.58)}
-    .unit-modal-card{
-      position:relative;
-      z-index:1;
-      width:min(77.28vw,436.8px);
-      margin:0;
-      padding:20.16px;
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255,255,255,.05), transparent 22%),
-        linear-gradient(180deg,#151515,#0d0d0d);
-      transform:scale(.84);
-      transform-origin:center center;
-    }
-    .close-btn{
-      position:absolute;
-      top:10.08px;
-      right:10.08px;
-      width:35.28px;
-      height:35.28px;
-      border:1px solid rgba(201,154,89,.26);
-      border-radius:50%;
-      background:rgba(255,255,255,.02);
-      cursor:pointer;
-      font-size:20.16px;
-      line-height:1;
-      color:#efcf9b
-    }
+    .unit-modal.open{display:block}
+    .backdrop{position:absolute;inset:0;background:rgba(0,0,0,.42)}
+    .unit-modal-card{position:relative;z-index:1;width:min(92vw,520px);margin:6vh auto 0;padding:24px}
+    .close-btn{position:absolute;top:12px;right:12px;width:42px;height:42px;border:0;border-radius:50%;background:#fff;cursor:pointer;font-size:24px;line-height:1}
     @media (max-width:900px){.tower-wrap{grid-template-columns:1fr}}
     @media (max-width:760px){
-      .unit-modal-card{width:min(77.28vw,436.8px);padding:20.16px;transform:scale(.84);transform-origin:center center}
-      .unit-modal-card h3{font-size:40.32px}
-      .unit-modal-card .kind{font-size:18.48px}
-      .unit-modal-card .sub{font-size:13.44px}
-      .unit-modal-card .detail-list span{font-size:12.6px}
-      .unit-modal-card .detail-list strong{font-size:13.44px}
-      .unit-modal-card .price strong{font-size:25.2px}
-      .unit-modal-card .btn{font-size:9.6px;padding:10.8px 13.2px}
+      html,body{overflow-x:hidden}
 
       .page{padding:24px 12px 36px}
       .lead{font-size:16px}
-      .tower-card{padding:14px 8px 10px}
-      .tower-tabs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+      .tower-card{padding:18px 10px 20px}
+      .tower-tabs{display:grid;grid-template-columns:1fr;gap:10px}
       .tower-tab{width:100%;min-width:0;padding:12px 10px;font-size:11px;letter-spacing:.08em;line-height:1.2;text-align:center}
-      .floor-label{width:22px;flex-basis:22px;padding-right:2px;font-size:8px}
-      .tower-drawing{--tower-wide-unit:min(21.675vw,75.225px);--tower-narrow-unit:min(17.85vw,62.475px)}
-      .tower-unit{height:36px;border-radius:12px;font-size:clamp(10px,2.9vw,14px)}
-      .tower-unit.unit-merged{width:min(43.35vw,154.9125px)!important;min-width:min(43.35vw,154.9125px)!important;max-width:min(43.35vw,154.9125px)!important}
-      .terrace-wing{width:min(6.8vw,35.7px);height:18.7px}
-      .podium-wrap{width:min(100%,calc(100vw - 145px));max-width:100%}
-      .podium-volume{height:53.55px}
-      .podium-unit{height:25.5px;font-size:7px;line-height:1.0;padding:1px;border-width:1px}
+      .floor-label{width:24px;flex-basis:24px;padding-right:2px;font-size:10px}
+      .tower-drawing{--tower-wide-unit:min(33vw,112px);--tower-narrow-unit:min(26vw,88px)}
+      .tower-unit{height:52px;border-radius:12px;font-size:clamp(13px,3.5vw,17px)}
+      .tower-unit.unit-merged{width:min(64vw,220px)!important;min-width:min(64vw,220px)!important;max-width:min(64vw,220px)!important}
+      .terrace-wing{width:min(6vw,28px);height:20px}
+      .podium-wrap{width:min(100%,calc(100vw - 54px));max-width:100%}
+      .podium-volume{height:84px}
+      .podium-unit{height:40px;font-size:8px;line-height:1.05;padding:2px 1px;border-width:1px}
       .podium-unit .u-dot{right:6px;bottom:6px;width:6px;height:6px}
       .side-panel{display:none}
-      .unit-modal-card h3{font-size:48px}
+      .unit-modal-card{width:min(calc(100vw - 24px),520px);margin:4vh auto 0;padding:20px 16px}
+      .unit-modal-card h3{font-size:42px}
+      .detail-list div{gap:10px}
+      .detail-list strong{font-size:14px}
+      .price strong{font-size:28px}
+      .btn{width:100%}
     }
-
   </style>
 </head>
 <body>
   <main class="page">
     <header class="header">
       <div class="eyebrow">Disponibilidade em tempo real</div>
-      <h1>Escolha sua unidade</h1>
-      <p class="lead">Visualize a torre, veja o status e consulte as informações comerciais de cada unidade. Este arquivo contém somente o bloco interativo do edifício.</p>
+      <h1>Escolha sua unidade no Renaissance</h1>
+      <p class="lead">Visualize a torre, acompanhe a disponibilidade e consulte as informações de cada unidade em uma experiência pensada para funcionar com precisão também no mobile.</p>
     </header>
 
     <section id="unidades">
@@ -355,14 +133,14 @@
 
           <div class="tower-panel active" id="tower-3">
             <div class="tower-drawing">
-              <div class="floor-row top"><div class="floor-label">18º</div><button class="tower-unit sold unit-merged" data-unit="1801"><span class="u-num">1801</span><span class="u-dot"></span></button></div>
+              <div class="floor-row top"><div class="floor-label">18º</div><button class="tower-unit sold unit-merged" data-unit="1801"><span class="u-num">VENDIDO</span><span class="u-dot"></span></button></div>
               <div class="floor-row narrow"><div class="floor-label">17º</div><button class="tower-unit av" data-unit="1702"><span class="u-num">1702</span><span class="u-dot"></span></button><button class="tower-unit av" data-unit="1701"><span class="u-num">1701</span><span class="u-dot"></span></button></div>
               <div class="floor-row narrow"><div class="floor-label">16º</div><button class="tower-unit av" data-unit="1602"><span class="u-num">1602</span><span class="u-dot"></span></button><button class="tower-unit av" data-unit="1601"><span class="u-num">1601</span><span class="u-dot"></span></button></div>
               <div class="floor-row narrow"><div class="floor-label">15º</div><button class="tower-unit av" data-unit="1502"><span class="u-num">1502</span><span class="u-dot"></span></button><button class="tower-unit av" data-unit="1501"><span class="u-num">1501</span><span class="u-dot"></span></button></div>
               <div class="floor-row narrow"><div class="floor-label">14º</div><button class="tower-unit av" data-unit="1402"><span class="u-num">1402</span><span class="u-dot"></span></button><button class="tower-unit av" data-unit="1401"><span class="u-num">1401</span><span class="u-dot"></span></button></div>
               <div class="floor-row terrace"><div class="floor-label">13º</div><div class="terrace-wing"></div><button class="tower-unit av" data-unit="1302"><span class="u-num">1302</span><span class="u-dot"></span></button><button class="tower-unit av" data-unit="1301"><span class="u-num">1301</span><span class="u-dot"></span></button><div class="terrace-wing"></div></div>
               <div class="floor-row wide"><div class="floor-label">12º</div><button class="tower-unit av" data-unit="1202"><span class="u-num">1202</span><span class="u-dot"></span></button><button class="tower-unit av" data-unit="1201"><span class="u-num">1201</span><span class="u-dot"></span></button></div>
-              <div class="floor-row wide"><div class="floor-label">11º</div><button class="tower-unit res" data-unit="1102"><span class="u-num">1102</span><span class="u-dot"></span></button><button class="tower-unit av" data-unit="1101"><span class="u-num">1101</span><span class="u-dot"></span></button></div>
+              <div class="floor-row wide"><div class="floor-label">11º</div><button class="tower-unit av" data-unit="1102"><span class="u-num">1102</span><span class="u-dot"></span></button><button class="tower-unit av" data-unit="1101"><span class="u-num">1101</span><span class="u-dot"></span></button></div>
               <div class="floor-row wide"><div class="floor-label">10º</div><button class="tower-unit av" data-unit="1002"><span class="u-num">1002</span><span class="u-dot"></span></button><button class="tower-unit av" data-unit="1001"><span class="u-num">1001</span><span class="u-dot"></span></button></div>
               <div class="floor-row wide"><div class="floor-label">9º</div><button class="tower-unit av" data-unit="902"><span class="u-num">902</span><span class="u-dot"></span></button><button class="tower-unit av" data-unit="901"><span class="u-num">901</span><span class="u-dot"></span></button></div>
               <div class="floor-row wide"><div class="floor-label">8º</div><button class="tower-unit av" data-unit="802"><span class="u-num">802</span><span class="u-dot"></span></button><button class="tower-unit av" data-unit="801"><span class="u-num">801</span><span class="u-dot"></span></button></div>
@@ -370,7 +148,7 @@
               <div class="floor-row wide"><div class="floor-label">6º</div><button class="tower-unit av" data-unit="602"><span class="u-num">602</span><span class="u-dot"></span></button><button class="tower-unit av" data-unit="601"><span class="u-num">601</span><span class="u-dot"></span></button></div>
               <div class="floor-row wide"><div class="floor-label">5º</div><button class="tower-unit av" data-unit="502"><span class="u-num">502</span><span class="u-dot"></span></button><button class="tower-unit av" data-unit="501"><span class="u-num">501</span><span class="u-dot"></span></button></div>
               <div class="floor-row wide"><div class="floor-label">4º</div><button class="tower-unit av" data-unit="402"><span class="u-num">402</span><span class="u-dot"></span></button><button class="tower-unit av" data-unit="401"><span class="u-num">401</span><span class="u-dot"></span></button></div>
-              <div class="floor-row ground-row"><div class="floor-label">T</div><div class="podium-wrap"><div class="podium-volume"></div><div class="podium-strip"><button class="podium-unit av" data-unit="Sala 04"><span>Sala 04</span><span class="u-dot"></span></button><button class="podium-unit sold" data-unit="Sala 03"><span>Sala 03</span><span class="u-dot"></span></button><div class="podium-unit podium-static"><span>Acesso<br>garagens</span></div><div class="podium-unit podium-static"><span>Hall de<br>entrada</span></div><div class="podium-unit podium-static"><span>Acesso<br>garagens</span></div><button class="podium-unit sold" data-unit="Sala 02"><span>Sala 02</span><span class="u-dot"></span></button><button class="podium-unit sold" data-unit="Sala 01"><span>Sala 01</span><span class="u-dot"></span></button></div></div></div>
+              <div class="floor-row ground-row"><div class="floor-label">T</div><div class="podium-wrap"><div class="podium-volume"></div><div class="podium-strip"><button class="podium-unit av" data-unit="Sala 04"><span>Sala 04</span><span class="u-dot"></span></button><button class="podium-unit sold" data-unit="Sala 03"><span>VENDIDO</span><span class="u-dot"></span></button><div class="podium-unit podium-static"><span>Acesso<br>garagens</span></div><div class="podium-unit podium-static"><span>Hall de<br>entrada</span></div><div class="podium-unit podium-static"><span>Acesso<br>garagens</span></div><button class="podium-unit sold" data-unit="Sala 02"><span>VENDIDO</span><span class="u-dot"></span></button><button class="podium-unit sold" data-unit="Sala 01"><span>VENDIDO</span><span class="u-dot"></span></button></div></div></div>
             </div>
           </div>
 
@@ -391,7 +169,7 @@
               <div class="floor-row wide"><div class="floor-label">6º</div><button class="tower-unit av" data-unit="603"><span class="u-num">603</span><span class="u-dot"></span></button><button class="tower-unit av" data-unit="604"><span class="u-num">604</span><span class="u-dot"></span></button></div>
               <div class="floor-row wide"><div class="floor-label">5º</div><button class="tower-unit av" data-unit="503"><span class="u-num">503</span><span class="u-dot"></span></button><button class="tower-unit av" data-unit="504"><span class="u-num">504</span><span class="u-dot"></span></button></div>
               <div class="floor-row wide"><div class="floor-label">4º</div><div class="tower-unit tower-unit--ghost"></div><div class="tower-unit tower-unit--ghost"></div></div>
-              <div class="floor-row ground-row"><div class="floor-label">T</div><div class="podium-wrap"><div class="podium-volume"></div><div class="podium-strip"><button class="podium-unit av" data-unit="Sala 04"><span>Sala 04</span><span class="u-dot"></span></button><button class="podium-unit sold" data-unit="Sala 03"><span>Sala 03</span><span class="u-dot"></span></button><div class="podium-unit podium-static"><span>Acesso<br>garagens</span></div><div class="podium-unit podium-static"><span>Hall de<br>entrada</span></div><div class="podium-unit podium-static"><span>Acesso<br>garagens</span></div><button class="podium-unit sold" data-unit="Sala 02"><span>Sala 02</span><span class="u-dot"></span></button><button class="podium-unit sold" data-unit="Sala 01"><span>Sala 01</span><span class="u-dot"></span></button></div></div></div>
+              <div class="floor-row ground-row"><div class="floor-label">T</div><div class="podium-wrap"><div class="podium-volume"></div><div class="podium-strip"><button class="podium-unit av" data-unit="Sala 04"><span>Sala 04</span><span class="u-dot"></span></button><button class="podium-unit sold" data-unit="Sala 03"><span>VENDIDO</span><span class="u-dot"></span></button><div class="podium-unit podium-static"><span>Acesso<br>garagens</span></div><div class="podium-unit podium-static"><span>Hall de<br>entrada</span></div><div class="podium-unit podium-static"><span>Acesso<br>garagens</span></div><button class="podium-unit sold" data-unit="Sala 02"><span>VENDIDO</span><span class="u-dot"></span></button><button class="podium-unit sold" data-unit="Sala 01"><span>VENDIDO</span><span class="u-dot"></span></button></div></div></div>
             </div>
           </div>
 
@@ -416,9 +194,8 @@
           </div>
           <div class="price"><small>Valor</small><strong id="panelPrice">R$ 1.490.000,00</strong></div>
           <div class="price-note">*Valor sem box de garagem</div>
-          <div class="btn-row">
-            <a class="btn btn-primary" href="#" id="panelWhats" target="_blank">Atendimento</a>
-            <a class="btn btn-light" href="#" id="panelPlant">Ver planta</a>
+          <div class="btn-row btn-row--single">
+            <a class="btn btn-light btn-disabled" href="#" id="panelPlant" aria-disabled="true">Ver planta</a>
           </div>
         </aside>
       </div>
@@ -442,59 +219,58 @@
       </div>
       <div class="price"><small>Valor</small><strong id="modalPrice">R$ 1.490.000,00</strong></div>
       <div class="price-note">*Valor sem box de garagem</div>
-      <div class="btn-row">
-        <a class="btn btn-primary" href="#" id="modalWhats" target="_blank">Atendimento</a>
-        <a class="btn btn-light" href="#" id="modalPlant">Ver planta</a>
+      <div class="btn-row btn-row--single">
+        <a class="btn btn-light btn-disabled" href="#" id="modalPlant" aria-disabled="true">Ver planta</a>
       </div>
     </div>
   </div>
 
   <script>
     const UNIT_DATA = {
-      "401": { floor:"4", type:"Casa Suspensa", sub:"3 suítes", area_global:"359,60 m²", area_priv:"258,94 m²", price:"R$ 1.490.000,00", status:"av", position:"Frente direita", plant:"#" },
-      "402": { floor:"4", type:"Casa Suspensa", sub:"3 suítes", area_global:"386,43 m²", area_priv:"280,12 m²", price:"R$ 1.490.000,00", status:"av", position:"Frente esquerda", plant:"#" },
-      "501": { floor:"5", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente direita", plant:"#" },
-      "502": { floor:"5", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente esquerda", plant:"#" },
-      "503": { floor:"5", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral esquerda", plant:"#" },
-      "504": { floor:"5", type:"Casa Suspensa", sub:"2 suítes", area_global:"205,98 m²", area_priv:"146,24 m²", price:"R$ 880.000,00", status:"av", position:"Lateral direita", plant:"#" },
-      "601": { floor:"6", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente direita", plant:"#" },
-      "602": { floor:"6", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente esquerda", plant:"#" },
-      "603": { floor:"6", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral esquerda", plant:"#" },
-      "604": { floor:"6", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral direita", plant:"#" },
-      "701": { floor:"7", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente direita", plant:"#" },
-      "702": { floor:"7", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente esquerda", plant:"#" },
-      "703": { floor:"7", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral esquerda", plant:"#" },
-      "704": { floor:"7", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral direita", plant:"#" },
-      "801": { floor:"8", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente direita", plant:"#" },
-      "802": { floor:"8", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente esquerda", plant:"#" },
-      "803": { floor:"8", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral esquerda", plant:"#" },
-      "804": { floor:"8", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral direita", plant:"#" },
-      "901": { floor:"9", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente direita", plant:"#" },
-      "902": { floor:"9", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente esquerda", plant:"#" },
-      "903": { floor:"9", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral esquerda", plant:"#" },
-      "904": { floor:"9", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral direita", plant:"#" },
-      "1001": { floor:"10", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente direita", plant:"#" },
-      "1002": { floor:"10", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente esquerda", plant:"#" },
-      "1003": { floor:"10", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral esquerda", plant:"#" },
-      "1004": { floor:"10", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral direita", plant:"#" },
-      "1101": { floor:"11", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.150.000,00", status:"av", position:"Frente direita", plant:"#" },
-      "1102": { floor:"11", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.150.000,00", status:"res", position:"Frente esquerda", plant:"#" },
-      "1103": { floor:"11", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 790.000,00", status:"av", position:"Lateral esquerda", plant:"#" },
-      "1104": { floor:"11", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 790.000,00", status:"av", position:"Lateral direita", plant:"#" },
-      "1201": { floor:"12", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.200.000,00", status:"av", position:"Frente direita", plant:"#" },
-      "1202": { floor:"12", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.200.000,00", status:"av", position:"Frente esquerda", plant:"#" },
-      "1203": { floor:"12", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 800.000,00", status:"av", position:"Lateral esquerda", plant:"#" },
-      "1204": { floor:"12", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 800.000,00", status:"av", position:"Lateral direita", plant:"#" },
-      "1301": { floor:"13", type:"Casa Suspensa", sub:"3 suítes", area_global:"307,01 m²", area_priv:"208,81 m²", price:"R$ 1.590.000,00", status:"av", position:"Frente direita", plant:"#" },
-      "1302": { floor:"13", type:"Casa Suspensa", sub:"3 suítes", area_global:"307,01 m²", area_priv:"208,81 m²", price:"R$ 1.590.000,00", status:"av", position:"Frente esquerda", plant:"#" },
-      "1401": { floor:"14", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente direita", plant:"#" },
-      "1402": { floor:"14", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente esquerda", plant:"#" },
-      "1501": { floor:"15", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente direita", plant:"#" },
-      "1502": { floor:"15", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente esquerda", plant:"#" },
-      "1601": { floor:"16", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente direita", plant:"#" },
-      "1602": { floor:"16", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente esquerda", plant:"#" },
-      "1701": { floor:"17", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente direita", plant:"#" },
-      "1702": { floor:"17", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente esquerda", plant:"#" },
+      "401": { floor:"4", type:"Casa Suspensa", sub:"3 suítes", area_global:"359,60 m²", area_priv:"258,94 m²", price:"R$ 1.490.000,00", status:"av", position:"Frente direita", plant:"A05.pdf" },
+      "402": { floor:"4", type:"Casa Suspensa", sub:"3 suítes", area_global:"386,43 m²", area_priv:"280,12 m²", price:"R$ 1.490.000,00", status:"av", position:"Frente esquerda", plant:"A05.pdf" },
+      "501": { floor:"5", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente direita", plant:"A06.pdf" },
+      "502": { floor:"5", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente esquerda", plant:"A06.pdf" },
+      "503": { floor:"5", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral esquerda", plant:"A06.pdf" },
+      "504": { floor:"5", type:"Casa Suspensa", sub:"2 suítes", area_global:"205,98 m²", area_priv:"146,24 m²", price:"R$ 880.000,00", status:"av", position:"Lateral direita", plant:"A06.pdf" },
+      "601": { floor:"6", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente direita", plant:"A07.pdf" },
+      "602": { floor:"6", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" },
+      "603": { floor:"6", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" },
+      "604": { floor:"6", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf" },
+      "701": { floor:"7", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente direita", plant:"A07.pdf" },
+      "702": { floor:"7", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" },
+      "703": { floor:"7", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" },
+      "704": { floor:"7", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf" },
+      "801": { floor:"8", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente direita", plant:"A07.pdf" },
+      "802": { floor:"8", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" },
+      "803": { floor:"8", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" },
+      "804": { floor:"8", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf" },
+      "901": { floor:"9", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente direita", plant:"A07.pdf" },
+      "902": { floor:"9", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" },
+      "903": { floor:"9", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" },
+      "904": { floor:"9", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf" },
+      "1001": { floor:"10", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente direita", plant:"A07.pdf" },
+      "1002": { floor:"10", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" },
+      "1003": { floor:"10", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" },
+      "1004": { floor:"10", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf" },
+      "1101": { floor:"11", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.150.000,00", status:"av", position:"Frente direita", plant:"A07.pdf" },
+      "1102": { floor:"11", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.150.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" },
+      "1103": { floor:"11", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 790.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" },
+      "1104": { floor:"11", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 790.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf" },
+      "1201": { floor:"12", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.200.000,00", status:"av", position:"Frente direita", plant:"A07.pdf" },
+      "1202": { floor:"12", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.200.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" },
+      "1203": { floor:"12", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 800.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" },
+      "1204": { floor:"12", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 800.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf" },
+      "1301": { floor:"13", type:"Casa Suspensa", sub:"3 suítes", area_global:"307,01 m²", area_priv:"208,81 m²", price:"R$ 1.590.000,00", status:"av", position:"Frente direita", plant:"A08.pdf" },
+      "1302": { floor:"13", type:"Casa Suspensa", sub:"3 suítes", area_global:"307,01 m²", area_priv:"208,81 m²", price:"R$ 1.590.000,00", status:"av", position:"Frente esquerda", plant:"A08.pdf" },
+      "1401": { floor:"14", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente direita", plant:"A09.pdf" },
+      "1402": { floor:"14", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente esquerda", plant:"A09.pdf" },
+      "1501": { floor:"15", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente direita", plant:"A09.pdf" },
+      "1502": { floor:"15", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente esquerda", plant:"A09.pdf" },
+      "1601": { floor:"16", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente direita", plant:"A09.pdf" },
+      "1602": { floor:"16", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente esquerda", plant:"A09.pdf" },
+      "1701": { floor:"17", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente direita", plant:"A09.pdf" },
+      "1702": { floor:"17", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente esquerda", plant:"A09.pdf" },
       "1801": { floor:"18", type:"Unidade exclusiva", sub:"4 suítes", area_global:"380,57 m²", area_priv:"316,71 m²", price:"Vendido", status:"sold", position:"Pavimento único", plant:"#" },
       "Sala 01": { floor:"T", type:"Sala comercial", sub:"Sala comercial", area_global:"201,06 m²", area_priv:"131,09 m²", price:"Vendido", status:"sold", position:"Térreo", plant:"#" },
       "Sala 02": { floor:"T", type:"Sala comercial", sub:"Sala comercial", area_global:"177,72 m²", area_priv:"115,87 m²", price:"Vendido", status:"sold", position:"Térreo", plant:"#" },
@@ -514,8 +290,9 @@
       const safeUnitId = window.CSS && CSS.escape ? CSS.escape(unitId) : unitId.replace(/"/g, '\\"');
       document.querySelectorAll(`[data-unit="${safeUnitId}"]`).forEach(el => el.classList.add('is-selected'));
 
+      const displayUnitLabel = unit.status === 'sold' ? 'VENDIDO' : unitId;
       const refs = {
-        panelUnit: unitId, modalUnit: unitId,
+        panelUnit: displayUnitLabel, modalUnit: displayUnitLabel,
         panelType: unit.type, modalType: unit.type,
         panelSub: unit.sub, modalSub: unit.sub,
         panelFloor: formatFloor(unit.floor), modalFloor: formatFloor(unit.floor),
@@ -536,14 +313,23 @@
         if(el) el.style.display = unit.sub ? '' : 'none';
       });
 
-      const text = encodeURIComponent(`Olá, quero mais informações sobre a unidade ${unitId} do Renaissance.`);
-      const whatsapp = `https://wa.me/5554999013331?text=${text}`;
-      document.getElementById('panelWhats').href = whatsapp;
-      document.getElementById('modalWhats').href = whatsapp;
-
       const plant = unit.plant || '#';
-      document.getElementById('panelPlant').href = plant;
-      document.getElementById('modalPlant').href = plant;
+      const hasPlant = plant && plant !== '#';
+      ['panelPlant','modalPlant'].forEach(id => {
+        const el = document.getElementById(id);
+        if(!el) return;
+        el.href = hasPlant ? plant : '#';
+        el.classList.toggle('btn-disabled', !hasPlant);
+        el.setAttribute('aria-disabled', hasPlant ? 'false' : 'true');
+        el.textContent = hasPlant ? 'Ver planta' : 'Planta em breve';
+        if(hasPlant) {
+          el.setAttribute('target', '_blank');
+          el.setAttribute('rel', 'noopener noreferrer');
+        } else {
+          el.removeAttribute('target');
+          el.removeAttribute('rel');
+        }
+      });
     }
 
     function openUnitModal(unitId){ updateUnitPanel(unitId); document.getElementById('unitModal').classList.add('open'); }
@@ -566,7 +352,13 @@
       });
     });
 
+
     document.querySelectorAll('[data-close-unit]').forEach(el => el.addEventListener('click', closeUnitModal));
+
+    document.addEventListener('click', (event) => {
+      const trigger = event.target.closest('.btn-disabled');
+      if(trigger) event.preventDefault();
+    });
 
     updateUnitPanel('401');
   </script>
