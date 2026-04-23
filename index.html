@@ -103,17 +103,33 @@
       .terrace-wing{width:min(6vw,28px);height:20px}
       .podium-wrap{width:min(100%,calc(100vw - 54px));max-width:100%}
       .podium-volume{height:84px}
-      .podium-unit{height:40px;font-size:8px;line-height:1.05;padding:2px 1px;border-width:1px}
+      .podium-unit{height:40px;font-size:7px;line-height:1;padding:2px 1px;border-width:1px;letter-spacing:-.01em}
+      .podium-unit span{font-size:7px;line-height:1;word-break:keep-all;overflow-wrap:normal}
+      .podium-static span{font-size:6.5px;line-height:1.02}
       .podium-unit .u-dot{right:6px;bottom:6px;width:6px;height:6px}
       .side-panel{display:none}
       .unit-modal-card{width:min(calc(100vw - 24px),520px);margin:4vh auto 0;padding:20px 16px}
-      .unit-modal-card h3{font-size:42px}
+      .unit-modal-card h3{font-size:38px;line-height:.95}
+      .unit-modal-card .kind{font-size:20px}
+      .unit-modal-card .sub{font-size:14px}
       .detail-list div{gap:10px}
       .detail-list strong{font-size:14px}
       .price strong{font-size:28px}
       .btn{width:100%}
     }
-  </style>
+  
+.pdf-modal{position:fixed;inset:0;display:none;z-index:80}
+.pdf-modal.open{display:block}
+.pdf-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.62)}
+.pdf-card{position:relative;z-index:1;width:min(96vw,980px);height:min(88vh,900px);margin:4vh auto 0;background:#111;border-radius:22px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.08)}
+.pdf-close{position:absolute;top:10px;right:10px;z-index:2;width:42px;height:42px;border:0;border-radius:50%;background:rgba(255,255,255,.96);color:#111;cursor:pointer;font-size:24px;line-height:1;box-shadow:0 8px 18px rgba(0,0,0,.18)}
+.pdf-frame{width:100%;height:100%;border:0;background:#fff}
+@media (max-width:760px){
+  .pdf-card{width:min(100vw - 12px,980px);height:min(92vh,900px);margin:2vh auto 0;border-radius:16px}
+  .pdf-close{top:8px;right:8px}
+}
+
+</style>
 </head>
 <body>
   <main class="page">
@@ -222,6 +238,15 @@
       <div class="btn-row btn-row--single">
         <a class="btn btn-light btn-disabled" href="#" id="modalPlant" aria-disabled="true">Ver planta</a>
       </div>
+    </div>
+  </div>
+
+
+  <div class="pdf-modal" id="pdfModal">
+    <div class="pdf-backdrop" data-close-pdf></div>
+    <div class="pdf-card">
+      <button class="pdf-close" type="button" aria-label="Fechar PDF" data-close-pdf>&times;</button>
+      <iframe class="pdf-frame" id="pdfFrame" title="Visualização do PDF"></iframe>
     </div>
   </div>
 
@@ -347,8 +372,10 @@
     document.querySelectorAll('.tower-unit[data-unit], .podium-unit[data-unit]').forEach(btn => {
       btn.addEventListener('click', () => {
         const unitId = btn.dataset.unit;
-        if(window.innerWidth <= 760) openUnitModal(unitId);
-        else updateUnitPanel(unitId);
+        updateUnitPanel(unitId);
+        if(window.matchMedia('(max-width: 900px)').matches) {
+          openUnitModal(unitId);
+        }
       });
     });
 
@@ -359,6 +386,39 @@
       const trigger = event.target.closest('.btn-disabled');
       if(trigger) event.preventDefault();
     });
+
+
+    function openPdfModal(url){
+      const modal = document.getElementById('pdfModal');
+      const frame = document.getElementById('pdfFrame');
+      if(!modal || !frame || !url || url === '#') return;
+      frame.src = url;
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePdfModal(){
+      const modal = document.getElementById('pdfModal');
+      const frame = document.getElementById('pdfFrame');
+      if(modal) modal.classList.remove('open');
+      if(frame) frame.src = '';
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('[data-close-pdf]').forEach(el => el.addEventListener('click', closePdfModal));
+
+    document.addEventListener('keydown', (event) => {
+      if(event.key === 'Escape') closePdfModal();
+    });
+
+    document.addEventListener('click', (event) => {
+      const trigger = event.target.closest('#panelPlant, #modalPlant');
+      if(!trigger || trigger.classList.contains('btn-disabled')) return;
+      event.preventDefault();
+      const href = trigger.getAttribute('href');
+      if(href && href !== '#') openPdfModal(href);
+    });
+
 
     updateUnitPanel('401');
   </script>
