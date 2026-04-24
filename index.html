@@ -88,12 +88,12 @@
     .unit-modal-card{position:relative;z-index:1;width:min(92vw,520px);margin:6vh auto 0;padding:24px}
     .close-btn{position:absolute;top:12px;right:12px;width:42px;height:42px;border:0;border-radius:50%;background:#fff;cursor:pointer;font-size:24px;line-height:1}
 
-    .pdf-modal{position:fixed;inset:0;display:none;z-index:80}
-    .pdf-modal.open{display:block}
-    .pdf-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.62)}
-    .pdf-card{position:relative;z-index:1;width:min(96vw,980px);height:min(88vh,900px);margin:4vh auto 0;background:#111;border-radius:22px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.08)}
-    .pdf-close{position:absolute;top:10px;right:10px;z-index:2;width:42px;height:42px;border:0;border-radius:50%;background:rgba(255,255,255,.96);color:#111;cursor:pointer;font-size:24px;line-height:1;box-shadow:0 8px 18px rgba(0,0,0,.18)}
-    .pdf-frame{width:100%;height:100%;border:0;background:#111}
+    .plant-modal{position:fixed;inset:0;display:none;z-index:80}
+    .plant-modal.open{display:block}
+    .plant-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.62)}
+    .plant-card{position:relative;z-index:1;width:min(96vw,1200px);height:min(90vh,950px);margin:3vh auto 0;background:#111;border-radius:22px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
+    .plant-close{position:absolute;top:10px;right:10px;z-index:2;width:42px;height:42px;border:0;border-radius:50%;background:rgba(255,255,255,.96);color:#111;cursor:pointer;font-size:24px;line-height:1;box-shadow:0 8px 18px rgba(0,0,0,.18)}
+    .plant-image{max-width:100%;max-height:100%;width:auto;height:auto;display:block;background:#fff}
 
     @media (max-width:900px){.tower-wrap{grid-template-columns:1fr}}
     @media (max-width:760px){
@@ -124,8 +124,8 @@
       .detail-list strong{font-size:14px}
       .price strong{font-size:28px}
       .btn{width:100%}
-      .pdf-card{width:min(100vw - 12px,980px);height:min(92vh,900px);margin:2vh auto 0;border-radius:16px}
-      .pdf-close{top:8px;right:8px}
+      .plant-card{width:min(100vw - 12px,1200px);height:min(92vh,950px);margin:2vh auto 0;border-radius:16px}
+      .plant-close{top:8px;right:8px}
     }
   </style>
 </head>
@@ -240,60 +240,60 @@
   </div>
 
 
-  <div class="pdf-modal" id="pdfModal">
-    <div class="pdf-backdrop" data-close-pdf></div>
-    <div class="pdf-card">
-      <button class="pdf-close" type="button" aria-label="Fechar PDF" data-close-pdf>&times;</button>
-      <iframe class="pdf-frame" id="pdfFrame" title="Visualização do PDF"></iframe>
+  <div class="plant-modal" id="plantModal">
+    <div class="plant-backdrop" data-close-plant></div>
+    <div class="plant-card">
+      <button class="plant-close" type="button" aria-label="Fechar planta" data-close-plant>&times;</button>
+      <img class="plant-image" id="plantImage" alt="Planta da unidade">
     </div>
   </div>
 
   <script>
     const UNIT_DATA = {
-      "401": { floor:"4", type:"Casa Suspensa", sub:"3 suítes", area_global:"359,60 m²", area_priv:"258,94 m²", price:"R$ 1.490.000,00", status:"av", position:"Frente direita", plant:"A05.pdf" },
-      "402": { floor:"4", type:"Casa Suspensa", sub:"3 suítes", area_global:"386,43 m²", area_priv:"280,12 m²", price:"R$ 1.490.000,00", status:"av", position:"Frente esquerda", plant:"A05.pdf" },
-      "501": { floor:"5", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente direita", plant:"A06.pdf" },
-      "502": { floor:"5", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente esquerda", plant:"A06.pdf" },
-      "503": { floor:"5", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral esquerda", plant:"A06.pdf" },
-      "504": { floor:"5", type:"Casa Suspensa", sub:"2 suítes", area_global:"205,98 m²", area_priv:"146,24 m²", price:"R$ 880.000,00", status:"av", position:"Lateral direita", plant:"A06.pdf" },
-      "601": { floor:"6", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente direita", plant:"A07.pdf" },
-      "602": { floor:"6", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" },
-      "603": { floor:"6", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" },
-      "604": { floor:"6", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf" },
-      "701": { floor:"7", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente direita", plant:"A07.pdf" },
-      "702": { floor:"7", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" },
-      "703": { floor:"7", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" },
-      "704": { floor:"7", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf" },
-      "801": { floor:"8", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente direita", plant:"A07.pdf" },
-      "802": { floor:"8", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" },
-      "803": { floor:"8", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" },
-      "804": { floor:"8", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf" },
-      "901": { floor:"9", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente direita", plant:"A07.pdf" },
-      "902": { floor:"9", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" },
-      "903": { floor:"9", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" },
-      "904": { floor:"9", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf" },
-      "1001": { floor:"10", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente direita", plant:"A07.pdf" },
-      "1002": { floor:"10", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" },
-      "1003": { floor:"10", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" },
-      "1004": { floor:"10", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf" },
-      "1101": { floor:"11", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.150.000,00", status:"av", position:"Frente direita", plant:"A07.pdf" },
-      "1102": { floor:"11", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.150.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" },
-      "1103": { floor:"11", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 790.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" },
-      "1104": { floor:"11", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 790.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf" },
-      "1201": { floor:"12", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.200.000,00", status:"av", position:"Frente direita", plant:"A07.pdf" },
-      "1202": { floor:"12", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.200.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" },
-      "1203": { floor:"12", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 800.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" },
-      "1204": { floor:"12", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 800.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf" },
-      "1301": { floor:"13", type:"Casa Suspensa", sub:"3 suítes", area_global:"307,01 m²", area_priv:"208,81 m²", price:"R$ 1.590.000,00", status:"av", position:"Frente direita", plant:"A08.pdf" },
-      "1302": { floor:"13", type:"Casa Suspensa", sub:"3 suítes", area_global:"307,01 m²", area_priv:"208,81 m²", price:"R$ 1.590.000,00", status:"av", position:"Frente esquerda", plant:"A08.pdf" },
-      "1401": { floor:"14", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente direita", plant:"A09.pdf" },
-      "1402": { floor:"14", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente esquerda", plant:"A09.pdf" },
-      "1501": { floor:"15", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente direita", plant:"A09.pdf" },
-      "1502": { floor:"15", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente esquerda", plant:"A09.pdf" },
-      "1601": { floor:"16", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente direita", plant:"A09.pdf" },
-      "1602": { floor:"16", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente esquerda", plant:"A09.pdf" },
-      "1701": { floor:"17", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente direita", plant:"A09.pdf" },
-      "1702": { floor:"17", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente esquerda", plant:"A09.pdf" },
+      "401": { floor:"4", type:"Casa Suspensa", sub:"3 suítes", area_global:"359,60 m²", area_priv:"258,94 m²", price:"R$ 1.490.000,00", status:"av", position:"Frente direita", plant:"A05.jpg" },
+      "402": { floor:"4", type:"Casa Suspensa", sub:"3 suítes", area_global:"386,43 m²", area_priv:"280,12 m²", price:"R$ 1.490.000,00", status:"av", position:"Frente esquerda", plant:"A05.jpg" },
+      "501": { floor:"5", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente direita", plant:"A06.jpg" },
+      "502": { floor:"5", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente esquerda", plant:"A06.jpg" },
+      "503": { floor:"5", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral esquerda", plant:"A06.jpg" },
+      "504": { floor:"5", type:"Casa Suspensa", sub:"2 suítes", area_global:"205,98 m²", area_priv:"146,24 m²", price:"R$ 880.000,00", status:"av", position:"Lateral direita", plant:"A06.jpg" },
+      "601": { floor:"6", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente direita", plant:"A07.jpg" },
+      "602": { floor:"6", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" },
+      "603": { floor:"6", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" },
+      "604": { floor:"6", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg" },
+      "701": { floor:"7", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente direita", plant:"A07.jpg" },
+      "702": { floor:"7", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" },
+      "703": { floor:"7", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" },
+      "704": { floor:"7", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg" },
+      "801": { floor:"8", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente direita", plant:"A07.jpg" },
+      "802": { floor:"8", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" },
+      "803": { floor:"8", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" },
+      "804": { floor:"8", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg" },
+      "901": { floor:"9", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente direita", plant:"A07.jpg" },
+      "902": { floor:"9", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" },
+      "903": { floor:"9", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" },
+      "904": { floor:"9", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg" },
+      "1001": { floor:"10", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente direita", plant:"A07.jpg" },
+      "1002": { floor:"10", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" },
+      "1003": { floor:"10", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" },
+      "1004": { floor:"10", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg" },
+      "1101": { floor:"11", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.150.000,00", status:"av", position:"Frente direita", plant:"A07.jpg" },
+      "1102": { floor:"11", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.150.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" },
+      "1103": { floor:"11", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 790.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" },
+      "1104": { floor:"11", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 790.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg" },
+      "1201": { floor:"12", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.200.000,00", status:"av", position:"Frente direita", plant:"A07.jpg" },
+      "1202": { floor:"12", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.200.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" },
+      "1203": { floor:"12", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 800.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" },
+      "1204": { floor:"12", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 800.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg" },
+      "1301": { floor:"13", type:"Casa Suspensa", sub:"3 suítes", area_global:"307,01 m²", area_priv:"208,81 m²", price:"R$ 1.590.000,00", status:"av", position:"Frente direita", plant:"A08.jpg" },
+      "1302": { floor:"13", type:"Casa Suspensa", sub:"3 suítes", area_global:"307,01 m²", area_priv:"208,81 m²", price:"R$ 1.590.000,00", status:"av", position:"Frente esquerda", plant:"A08.jpg" },
+      "1401": { floor:"14", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente direita", plant:"A09(1).jpg" },
+      "1402": { floor:"14", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente esquerda", plant:"A09(1).jpg" },
+      "1501": { floor:"15", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente direita", plant:"A09(1).jpg" },
+      "1502": { floor:"15", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente esquerda", plant:"A09(1).jpg" },
+      "1601": { floor:"16", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente direita", plant:"A09(1).jpg" },
+      "1602": { floor:"16", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente esquerda", plant:"A09(1).jpg" },
+      "1701": { floor:"17", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente direita", plant:"A09(1).jpg" },
+      "1702": { floor:"17", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente esquerda", plant:"A09(1).jpg" },
       "1801": { floor:"18", type:"Unidade exclusiva", sub:"4 suítes", area_global:"380,57 m²", area_priv:"316,71 m²", price:"Vendido", status:"sold", position:"Pavimento único", plant:"#" },
       "Sala 01": { floor:"T", type:"Sala comercial", sub:"Sala comercial", area_global:"201,06 m²", area_priv:"131,09 m²", price:"Vendido", status:"sold", position:"Térreo", plant:"#" },
       "Sala 02": { floor:"T", type:"Sala comercial", sub:"Sala comercial", area_global:"177,72 m²", area_priv:"115,87 m²", price:"Vendido", status:"sold", position:"Térreo", plant:"#" },
@@ -381,29 +381,30 @@
     });
 
 
-    function openPdfModal(url){
-      const modal = document.getElementById('pdfModal');
-      const frame = document.getElementById('pdfFrame');
-      if(!modal || !frame || !url || url === '#') return;
+    function openPlantModal(url, label){
+      const modal = document.getElementById('plantModal');
+      const image = document.getElementById('plantImage');
+      if(!modal || !image || !url || url === '#') return;
 
       const absoluteUrl = new URL(url, window.location.href).href;
-      frame.src = absoluteUrl + '#toolbar=0&navpanes=0&scrollbar=1&view=FitH';
+      image.src = absoluteUrl;
+      image.alt = label ? `Planta ${label}` : 'Planta da unidade';
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
-    function closePdfModal(){
-      const modal = document.getElementById('pdfModal');
-      const frame = document.getElementById('pdfFrame');
+    function closePlantModal(){
+      const modal = document.getElementById('plantModal');
+      const image = document.getElementById('plantImage');
       if(modal) modal.classList.remove('open');
-      if(frame) frame.src = '';
+      if(image) image.src = '';
       document.body.style.overflow = '';
     }
 
-    document.querySelectorAll('[data-close-pdf]').forEach(el => el.addEventListener('click', closePdfModal));
+    document.querySelectorAll('[data-close-plant]').forEach(el => el.addEventListener('click', closePlantModal));
 
     document.addEventListener('keydown', (event) => {
-      if(event.key === 'Escape') closePdfModal();
+      if(event.key === 'Escape') closePlantModal();
     });
 
     document.addEventListener('click', (event) => {
@@ -411,7 +412,8 @@
       if(!trigger || trigger.classList.contains('btn-disabled')) return;
       event.preventDefault();
       const href = trigger.getAttribute('href');
-      if(href && href !== '#') openPdfModal(href);
+      const label = document.getElementById('panelUnit')?.textContent || document.getElementById('modalUnit')?.textContent || '';
+      if(href && href !== '#') openPlantModal(href, label);
     });
 
     updateUnitPanel('401');
