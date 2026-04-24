@@ -91,9 +91,9 @@
     .plant-modal{position:fixed;inset:0;display:none;z-index:80}
     .plant-modal.open{display:block}
     .plant-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.62)}
-    .plant-card{position:relative;z-index:1;width:min(96vw,1200px);height:min(90vh,950px);margin:3vh auto 0;background:#111;border-radius:22px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
+    .plant-card{position:relative;z-index:1;width:min(96vw,1200px);height:min(90vh,950px);margin:3vh auto 0;padding:64px 14px 14px;background:#111;border-radius:22px;overflow:auto;box-shadow:0 24px 70px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.08);display:flex;align-items:flex-start;justify-content:center;-webkit-overflow-scrolling:touch}
     .plant-close{position:absolute;top:10px;right:10px;z-index:2;width:42px;height:42px;border:0;border-radius:50%;background:rgba(255,255,255,.96);color:#111;cursor:pointer;font-size:24px;line-height:1;box-shadow:0 8px 18px rgba(0,0,0,.18)}
-    .plant-image{max-width:100%;max-height:100%;width:auto;height:auto;display:block;background:#fff}
+    .plant-image{display:block;background:#fff;width:min(1400px,120%);max-width:none;height:auto;margin:0 auto;box-shadow:0 10px 28px rgba(0,0,0,.28)}
 
     @media (max-width:900px){.tower-wrap{grid-template-columns:1fr}}
     @media (max-width:760px){
@@ -108,6 +108,8 @@
       .tower-drawing{--tower-wide-unit:min(33vw,112px);--tower-narrow-unit:min(26vw,88px)}
       .tower-unit{height:52px;border-radius:12px;font-size:clamp(13px,3.5vw,17px)}
       .tower-unit.unit-merged{width:min(64vw,220px)!important;min-width:min(64vw,220px)!important;max-width:min(64vw,220px)!important}
+      .plant-card{width:min(calc(100vw - 16px),560px);height:min(92vh,900px);padding:68px 10px 10px;border-radius:18px}
+      .plant-image{width:1350px;max-width:none;min-width:1100px}
       .terrace-wing{width:min(6vw,28px);height:20px}
       .podium-wrap{width:min(100%,calc(100vw - 54px));max-width:100%}
       .podium-volume{height:84px}
