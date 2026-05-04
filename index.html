@@ -8,7 +8,7 @@
     /* =========================================================
        RENAISSANCE - ESCOLHA DE UNIDADES
        Estrutura organizada: estilos globais, topo, torre, ficha e modais.
-       Imagens pesadas foram movidas para /assets para facilitar manutenção.
+       Imagens de plantas humanizadas ficam na raiz do repositório, junto das plantas técnicas.
        ========================================================= */
     :root{
       --bg:#15110d;
@@ -69,7 +69,7 @@
       justify-content:flex-start;
       background:
         linear-gradient(90deg, rgba(12,9,7,.88) 0%, rgba(12,9,7,.78) 28%, rgba(12,9,7,.45) 56%, rgba(12,9,7,.18) 100%),
-        url('assets/topo-subliminar.jpg') center center / cover no-repeat;
+        url('topo-subliminar.jpg') center center / cover no-repeat;
     }
     .hero-header::after{
       content:"";
@@ -1279,7 +1279,7 @@
       topo-subliminar.jpg
     */
     .hero-header{
-      --hero-bg: url('assets/topo-subliminar.jpg') !important;
+      --hero-bg: url('topo-subliminar.jpg') !important;
       background:
         linear-gradient(90deg, rgba(9,7,6,.90) 0%, rgba(16,11,9,.80) 34%, rgba(20,14,11,.52) 66%, rgba(20,14,11,.28) 100%),
         var(--hero-bg) !important;
@@ -1308,7 +1308,7 @@
       - manter leitura da logo e textos
     */
     .hero-header{
-      --hero-bg: url('assets/topo-subliminar.jpg') !important;
+      --hero-bg: url('topo-subliminar.jpg') !important;
       background-image:
         linear-gradient(90deg,
           rgba(8,6,5,.56) 0%,
@@ -1401,7 +1401,7 @@
     <header class="header">
       <div class="hero-header">
         <div class="hero-content">
-          <img class="hero-logo" src="assets/logo-renaissance.png" alt="Renaissance Senger">
+          <img class="hero-logo" src="logo-renaissance.png" alt="Renaissance Senger">
           <div class="hero-kicker">Disponibilidade</div>
           <p class="hero-text">Consulte a disponibilidade e visualize cada unidade com mais praticidade.</p>
         </div>
@@ -1529,46 +1529,46 @@
       "402": { floor:"4", type:"Casa Suspensa", sub:"3 suítes", area_global:"386,43 m²", area_priv:"280,12 m²", price:"R$ 1.490.000,00", status:"av", position:"Frente esquerda", plant:"A05.jpg" },
       "501": { floor:"5", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente direita", plant:"A06.jpg" },
       "502": { floor:"5", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente esquerda", plant:"A06.jpg" },
-      "503": { floor:"5", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral esquerda", plant:"A06.jpg" , humanized:"assets/plantas-humanizadas/2 suites final 3.jpeg" },
+      "503": { floor:"5", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral esquerda", plant:"A06.jpg" , humanized:"2 suites final 3.jpeg" },
       "504": { floor:"5", type:"Casa Suspensa", sub:"2 suítes", area_global:"205,98 m²", area_priv:"146,24 m²", price:"R$ 880.000,00", status:"av", position:"Lateral direita", plant:"A06.jpg" },
       "601": { floor:"6", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente direita", plant:"A07.jpg" },
       "602": { floor:"6", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" },
-      "603": { floor:"6", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"assets/plantas-humanizadas/2 suites final 3.jpeg" },
+      "603": { floor:"6", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"2 suites final 3.jpeg" },
       "604": { floor:"6", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg" },
       "701": { floor:"7", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente direita", plant:"A07.jpg" },
       "702": { floor:"7", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" },
-      "703": { floor:"7", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"assets/plantas-humanizadas/2 suites final 3.jpeg" },
+      "703": { floor:"7", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"2 suites final 3.jpeg" },
       "704": { floor:"7", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg" },
       "801": { floor:"8", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente direita", plant:"A07.jpg" },
       "802": { floor:"8", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" },
-      "803": { floor:"8", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"res", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"assets/plantas-humanizadas/2 suites final 3.jpeg" },
+      "803": { floor:"8", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"res", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"2 suites final 3.jpeg" },
       "804": { floor:"8", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg" },
       "901": { floor:"9", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente direita", plant:"A07.jpg" },
       "902": { floor:"9", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" },
-      "903": { floor:"9", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"assets/plantas-humanizadas/2 suites final 3.jpeg" },
+      "903": { floor:"9", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"2 suites final 3.jpeg" },
       "904": { floor:"9", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg" },
       "1001": { floor:"10", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente direita", plant:"A07.jpg" },
       "1002": { floor:"10", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" },
-      "1003": { floor:"10", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"assets/plantas-humanizadas/2 suites final 3.jpeg" },
+      "1003": { floor:"10", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"2 suites final 3.jpeg" },
       "1004": { floor:"10", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg" },
       "1101": { floor:"11", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.150.000,00", status:"av", position:"Frente direita", plant:"A07.jpg" },
       "1102": { floor:"11", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.150.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" },
-      "1103": { floor:"11", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 790.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"assets/plantas-humanizadas/2 suites final 3.jpeg" },
+      "1103": { floor:"11", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 790.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"2 suites final 3.jpeg" },
       "1104": { floor:"11", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 790.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg" },
       "1201": { floor:"12", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.200.000,00", status:"av", position:"Frente direita", plant:"A07.jpg" },
       "1202": { floor:"12", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.200.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" },
-      "1203": { floor:"12", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 800.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"assets/plantas-humanizadas/2 suites final 3.jpeg" },
+      "1203": { floor:"12", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 800.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"2 suites final 3.jpeg" },
       "1204": { floor:"12", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 800.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg" },
       "1301": { floor:"13", type:"Casa Suspensa", sub:"3 suítes", area_global:"307,01 m²", area_priv:"208,81 m²", price:"R$ 1.590.000,00", status:"av", position:"Frente direita", plant:"A08.jpg" },
       "1302": { floor:"13", type:"Casa Suspensa", sub:"3 suítes", area_global:"307,01 m²", area_priv:"208,81 m²", price:"R$ 1.590.000,00", status:"av", position:"Frente esquerda", plant:"A08.jpg" },
-      "1401": { floor:"14", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente direita", plant:"A09.jpg", humanized:"assets/plantas-humanizadas/planta 3 suites superior final 1.png" },
-      "1402": { floor:"14", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente esquerda", plant:"A09.jpg", humanized:"assets/plantas-humanizadas/Planta 3 suites superior final 2.png" },
-      "1501": { floor:"15", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente direita", plant:"A09.jpg", humanized:"assets/plantas-humanizadas/planta 3 suites superior final 1.png" },
-      "1502": { floor:"15", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente esquerda", plant:"A09.jpg", humanized:"assets/plantas-humanizadas/Planta 3 suites superior final 2.png" },
-      "1601": { floor:"16", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente direita", plant:"A09.jpg", humanized:"assets/plantas-humanizadas/planta 3 suites superior final 1.png" },
-      "1602": { floor:"16", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente esquerda", plant:"A09.jpg", humanized:"assets/plantas-humanizadas/Planta 3 suites superior final 2.png" },
-      "1701": { floor:"17", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente direita", plant:"A09.jpg", humanized:"assets/plantas-humanizadas/planta 3 suites superior final 1.png" },
-      "1702": { floor:"17", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente esquerda", plant:"A09.jpg", humanized:"assets/plantas-humanizadas/Planta 3 suites superior final 2.png" },
+      "1401": { floor:"14", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente direita", plant:"A09.jpg", humanized:"planta 3 suites superior final 1.png" },
+      "1402": { floor:"14", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente esquerda", plant:"A09.jpg", humanized:"Planta 3 suites superior final 2.png" },
+      "1501": { floor:"15", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente direita", plant:"A09.jpg", humanized:"planta 3 suites superior final 1.png" },
+      "1502": { floor:"15", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente esquerda", plant:"A09.jpg", humanized:"Planta 3 suites superior final 2.png" },
+      "1601": { floor:"16", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente direita", plant:"A09.jpg", humanized:"planta 3 suites superior final 1.png" },
+      "1602": { floor:"16", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente esquerda", plant:"A09.jpg", humanized:"Planta 3 suites superior final 2.png" },
+      "1701": { floor:"17", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente direita", plant:"A09.jpg", humanized:"planta 3 suites superior final 1.png" },
+      "1702": { floor:"17", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente esquerda", plant:"A09.jpg", humanized:"Planta 3 suites superior final 2.png" },
       "1801": { floor:"18", type:"Unidade exclusiva", sub:"4 suítes", area_global:"380,57 m²", area_priv:"316,71 m²", price:"Vendido", status:"sold", position:"Pavimento único", plant:"#" },
       "Sala 01": { floor:"T", type:"Sala comercial", sub:"Sala comercial", area_global:"201,06 m²", area_priv:"131,09 m²", price:"Vendido", status:"sold", position:"Térreo", plant:"#" },
       "Sala 02": { floor:"T", type:"Sala comercial", sub:"Sala comercial", area_global:"177,72 m²", area_priv:"115,87 m²", price:"Vendido", status:"sold", position:"Térreo", plant:"#" },
