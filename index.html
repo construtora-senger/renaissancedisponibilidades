@@ -1947,75 +1947,93 @@
 
   </style>
 
-  <style id="ajuste-banner-corrigido-final">
+  <style id="ajuste-banner-corrigido-v2">
     /*
-      Ajuste final do cabeçalho:
-      - mantém o banner compacto
-      - posiciona a data abaixo de "Disponibilidade"
-      - evita sobreposição da data sobre a logo
-      - mantém a imagem de fundo visível e elegante
+      Correção real do banner:
+      - a data agora fica dentro do bloco da esquerda, abaixo de Disponibilidade
+      - não existe mais data solta no topo do banner
+      - evita sobreposição com a logo
+      - mantém o banner mais baixo e sem área vazia exagerada
     */
 
     .hero-header{
       min-height:132px !important;
       padding:18px 28px 16px !important;
       align-items:flex-start !important;
+      justify-content:flex-start !important;
     }
 
     .hero-content{
+      position:relative !important;
+      z-index:2 !important;
+      display:flex !important;
+      flex-direction:column !important;
+      align-items:flex-start !important;
       gap:7px !important;
-      max-width:520px !important;
+      max-width:560px !important;
       margin-left:0 !important;
       padding:0 !important;
     }
 
     .hero-content::before{
-      inset:-10px -22px -12px -14px !important;
+      content:"" !important;
+      position:absolute !important;
+      inset:-11px -24px -13px -14px !important;
       border-radius:18px !important;
       background:
         linear-gradient(90deg,
-          rgba(10,7,6,.42) 0%,
-          rgba(10,7,6,.24) 58%,
+          rgba(10,7,6,.44) 0%,
+          rgba(10,7,6,.27) 58%,
           rgba(10,7,6,0) 100%) !important;
+      z-index:-1 !important;
+      pointer-events:none !important;
     }
 
     .hero-logo{
-      max-width:165px !important;
-      width:165px !important;
-      height:auto !important;
       display:block !important;
+      width:165px !important;
+      max-width:165px !important;
+      height:auto !important;
       margin:0 0 4px 0 !important;
+      filter:drop-shadow(0 10px 22px rgba(0,0,0,.42)) !important;
     }
 
     .hero-kicker{
-      margin-top:0 !important;
+      margin:0 !important;
+      color:#e4c389 !important;
       font-size:10px !important;
       line-height:1.1 !important;
       letter-spacing:.18em !important;
-      color:#e4c389 !important;
+      text-transform:uppercase !important;
+      font-weight:800 !important;
+      text-shadow:0 3px 12px rgba(0,0,0,.34) !important;
     }
 
     .hero-date{
-      position:static !important;
+      display:none !important;
+    }
+
+    .hero-date-inline{
       display:block !important;
-      margin-top:4px !important;
-      max-width:520px !important;
-      text-align:left !important;
+      margin:0 !important;
+      max-width:560px !important;
+      color:rgba(255,247,235,.78) !important;
       font-size:10px !important;
       line-height:1.25 !important;
       letter-spacing:.01em !important;
-      color:rgba(255,247,235,.78) !important;
+      text-align:left !important;
       text-shadow:0 2px 10px rgba(0,0,0,.42) !important;
+      white-space:normal !important;
     }
 
     @media (max-width:760px){
       .hero-header{
-        min-height:120px !important;
+        min-height:118px !important;
         padding:15px 14px 13px !important;
       }
 
       .hero-content{
-        max-width:310px !important;
+        max-width:315px !important;
         gap:6px !important;
       }
 
@@ -2024,14 +2042,14 @@
         border-radius:15px !important;
         background:
           linear-gradient(90deg,
-            rgba(10,7,6,.42) 0%,
-            rgba(10,7,6,.24) 62%,
+            rgba(10,7,6,.44) 0%,
+            rgba(10,7,6,.26) 62%,
             rgba(10,7,6,0) 100%) !important;
       }
 
       .hero-logo{
-        max-width:128px !important;
         width:128px !important;
+        max-width:128px !important;
         margin-bottom:3px !important;
       }
 
@@ -2040,10 +2058,10 @@
         letter-spacing:.15em !important;
       }
 
-      .hero-date{
+      .hero-date-inline{
         font-size:8px !important;
         max-width:300px !important;
-        margin-top:3px !important;
+        line-height:1.25 !important;
       }
     }
   </style>
@@ -2056,9 +2074,9 @@
         <div class="hero-content">
           <img class="hero-logo" src="logo-renaissance.png" alt="Renaissance Senger">
           <div class="hero-kicker">Disponibilidade</div>
+          <div class="hero-date-inline">Atualizado em 05/05/2026 · Valores e disponibilidade sujeitos a alteração</div>
           
         </div>
-        <div class="hero-date">Atualizado em 05/05/2026 · Valores e disponibilidade sujeitos a alteração</div>
       </div>
     </header>
 
