@@ -1395,6 +1395,558 @@
     }
   </style>
 
+
+
+  <style id="correcao-final-estabilidade-layout">
+    /* =========================================================
+       CORREÇÃO FINAL - ESTABILIDADE RENAISSANCE
+       Objetivo: resolver conflitos acumulados sem alterar dados.
+       - Seletores alinhados ao HTML real
+       - Ficha lateral corrigida em h3
+       - Pontos de status corrigidos em .u-dot
+       - Torre estabilizada sem depender de .tower-stack inexistente
+       - Mobile sem estouro horizontal
+       ========================================================= */
+
+    html, body {
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+    }
+
+    .page {
+      width: min(100% - 28px, 1120px) !important;
+      margin: 14px auto 28px !important;
+      padding: 13px !important;
+    }
+
+    .tower-wrap {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1.5fr) minmax(290px, .88fr) !important;
+      gap: 14px !important;
+      align-items: start !important;
+      min-width: 0 !important;
+    }
+
+    .tower-card {
+      padding: 12px 12px 12px !important;
+      min-width: 0 !important;
+      overflow: hidden !important;
+    }
+
+    .tower-card::before,
+    .side-panel::before {
+      margin: 0 0 10px 0 !important;
+    }
+
+    .tower-tabs {
+      margin: 0 0 12px !important;
+      padding: 6px !important;
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+    }
+
+    .tower-tab {
+      min-width: 0 !important;
+      height: 38px !important;
+      padding: 0 14px !important;
+      white-space: normal !important;
+      line-height: 1.15 !important;
+    }
+
+    .tower-panel {
+      min-width: 0 !important;
+      width: 100% !important;
+    }
+
+    .tower-drawing {
+      width: 100% !important;
+      min-width: 0 !important;
+      gap: 5px !important;
+      --tower-wide-unit: 104px !important;
+      --tower-narrow-unit: 88px !important;
+      transform: none !important;
+      margin: 0 auto !important;
+    }
+
+    .floor-row {
+      width: 100% !important;
+      min-width: 0 !important;
+      gap: 5px !important;
+    }
+
+    .floor-label {
+      width: 30px !important;
+      flex: 0 0 30px !important;
+      font-size: 10px !important;
+      padding-right: 3px !important;
+    }
+
+    .tower-unit {
+      height: 43px !important;
+      min-height: 43px !important;
+      border-radius: 12px !important;
+      font-size: 15px !important;
+      line-height: 1 !important;
+      flex: 0 0 auto !important;
+    }
+
+    .floor-row.narrow .tower-unit,
+    .floor-row.top .tower-unit:not(.unit-merged) {
+      width: var(--tower-narrow-unit) !important;
+      min-width: var(--tower-narrow-unit) !important;
+      max-width: var(--tower-narrow-unit) !important;
+      height: 43px !important;
+    }
+
+    .floor-row.wide .tower-unit,
+    .floor-row.terrace .tower-unit {
+      width: var(--tower-wide-unit) !important;
+      min-width: var(--tower-wide-unit) !important;
+      max-width: var(--tower-wide-unit) !important;
+      height: 43px !important;
+    }
+
+    .tower-unit.unit-merged {
+      width: calc(var(--tower-narrow-unit) * 2 + 5px) !important;
+      min-width: calc(var(--tower-narrow-unit) * 2 + 5px) !important;
+      max-width: calc(var(--tower-narrow-unit) * 2 + 5px) !important;
+      height: 43px !important;
+      font-size: 13px !important;
+    }
+
+    .terrace-wing {
+      width: 22px !important;
+      height: 16px !important;
+      flex: 0 0 22px !important;
+    }
+
+    .tower-unit--ghost {
+      opacity: .82 !important;
+    }
+
+    .podium-wrap {
+      width: min(100%, 506px) !important;
+      max-width: 506px !important;
+      min-width: 0 !important;
+    }
+
+    .podium-volume {
+      height: 62px !important;
+      margin-top: 4px !important;
+      border-radius: 14px 14px 0 0 !important;
+    }
+
+    .podium-strip {
+      display: grid !important;
+      grid-template-columns: 74fr 74fr 76fr 120fr 76fr 74fr 74fr !important;
+      width: 100% !important;
+      min-width: 0 !important;
+    }
+
+    .podium-unit {
+      height: 34px !important;
+      min-width: 0 !important;
+      font-size: 7.5px !important;
+      line-height: 1.05 !important;
+      padding: 2px 1px !important;
+    }
+
+    .podium-unit span {
+      font-size: inherit !important;
+      line-height: inherit !important;
+      overflow-wrap: normal !important;
+      word-break: normal !important;
+    }
+
+    .tower-unit .u-dot,
+    .podium-unit .u-dot {
+      width: 8px !important;
+      height: 8px !important;
+      right: 8px !important;
+      bottom: 8px !important;
+      border-radius: 50% !important;
+      box-shadow: 0 0 0 2px rgba(255,255,255,.62), 0 3px 8px rgba(0,0,0,.18) !important;
+    }
+
+    .tower-unit.av .u-dot,
+    .podium-unit.av .u-dot { background: var(--green) !important; color: var(--green) !important; }
+    .tower-unit.res .u-dot,
+    .podium-unit.res .u-dot { background: var(--gold) !important; color: var(--gold) !important; }
+    .tower-unit.sold .u-dot,
+    .podium-unit.sold .u-dot { background: var(--red) !important; color: var(--red) !important; }
+
+    .legend {
+      margin-top: 9px !important;
+      padding-top: 9px !important;
+      gap: 14px !important;
+      font-size: 10px !important;
+    }
+
+    .legend .dot {
+      width: 10px !important;
+      height: 10px !important;
+      flex: 0 0 10px !important;
+    }
+
+    .side-panel {
+      padding: 17px 18px !important;
+      position: sticky !important;
+      top: 18px !important;
+      border-radius: 20px !important;
+      overflow: hidden !important;
+    }
+
+    .side-panel h3,
+    .unit-modal-card h3 {
+      color: #15100d !important;
+      font-family: Georgia, 'Times New Roman', serif !important;
+      font-size: 34px !important;
+      line-height: .94 !important;
+      margin: 15px 0 5px !important;
+      letter-spacing: -.02em !important;
+      text-shadow: 0 1px 0 rgba(255,255,255,.6) !important;
+    }
+
+    .side-panel .kind,
+    .unit-modal-card .kind {
+      font-size: 19px !important;
+      margin-bottom: 3px !important;
+      color: #2d2118 !important;
+    }
+
+    .side-panel .sub,
+    .unit-modal-card .sub {
+      font-size: 12px !important;
+      margin-bottom: 12px !important;
+    }
+
+    .detail-list {
+      margin: 14px 0 12px !important;
+      gap: 4px !important;
+    }
+
+    .detail-list div {
+      padding: 7px 0 !important;
+      font-size: 12px !important;
+    }
+
+    .price strong {
+      font-size: 22px !important;
+      line-height: 1.08 !important;
+    }
+
+    .price small,
+    .price-note {
+      font-size: 10px !important;
+    }
+
+    .btn-row {
+      gap: 8px !important;
+      margin-top: 14px !important;
+    }
+
+    .btn {
+      min-height: 35px !important;
+      padding: 10px 13px !important;
+      font-size: 9px !important;
+      letter-spacing: .09em !important;
+    }
+
+    .unit-modal-card {
+      width: min(92vw, 430px) !important;
+      max-height: 88dvh !important;
+      overflow-y: auto !important;
+      padding: 18px !important;
+      border-radius: 20px !important;
+    }
+
+    .close-btn,
+    .plant-close {
+      touch-action: manipulation !important;
+    }
+
+    .plant-card {
+      overflow: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+
+    .plant-image {
+      max-width: 100% !important;
+      height: auto !important;
+      object-fit: contain !important;
+    }
+
+    @media (max-width: 900px) {
+      .tower-wrap {
+        grid-template-columns: 1fr !important;
+      }
+      .side-panel {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 8px 8px 22px !important;
+        border-radius: 0 !important;
+      }
+
+      .header {
+        margin: 0 0 8px !important;
+        border-radius: 16px !important;
+      }
+
+      .hero-header {
+        min-height: 134px !important;
+        padding: 14px 15px 13px !important;
+      }
+
+      .hero-logo { max-width: 118px !important; }
+      .hero-kicker { margin-top: 10px !important; font-size: 8px !important; }
+      .hero-text { font-size: 12px !important; line-height: 1.34 !important; max-width: 295px !important; }
+      .hero-date { font-size: 8px !important; right: 12px !important; bottom: 10px !important; max-width: 150px !important; }
+
+      .tower-card {
+        padding: 8px 6px 9px !important;
+        border-radius: 17px !important;
+      }
+
+      .tower-tabs {
+        grid-template-columns: 1fr !important;
+        gap: 6px !important;
+        margin-bottom: 8px !important;
+        border-radius: 18px !important;
+      }
+
+      .tower-tab {
+        height: 34px !important;
+        font-size: 8px !important;
+        letter-spacing: .08em !important;
+      }
+
+      .tower-drawing {
+        --tower-wide-unit: min(30.5vw, 96px) !important;
+        --tower-narrow-unit: min(25vw, 78px) !important;
+        gap: 4px !important;
+      }
+
+      .floor-row {
+        gap: 4px !important;
+      }
+
+      .floor-label {
+        width: 22px !important;
+        flex-basis: 22px !important;
+        font-size: 9px !important;
+        padding-right: 1px !important;
+      }
+
+      .tower-unit,
+      .floor-row.narrow .tower-unit,
+      .floor-row.wide .tower-unit,
+      .floor-row.terrace .tower-unit,
+      .floor-row.top .tower-unit:not(.unit-merged) {
+        height: 39px !important;
+        min-height: 39px !important;
+        border-radius: 10px !important;
+        font-size: 13px !important;
+      }
+
+      .tower-unit.unit-merged {
+        width: calc(var(--tower-narrow-unit) * 2 + 4px) !important;
+        min-width: calc(var(--tower-narrow-unit) * 2 + 4px) !important;
+        max-width: calc(var(--tower-narrow-unit) * 2 + 4px) !important;
+        height: 39px !important;
+        font-size: 11px !important;
+      }
+
+      .terrace-wing {
+        width: min(5vw, 17px) !important;
+        flex-basis: min(5vw, 17px) !important;
+        height: 13px !important;
+      }
+
+      .podium-wrap {
+        width: calc(100vw - 50px) !important;
+        max-width: 100% !important;
+      }
+
+      .podium-volume {
+        height: 54px !important;
+        margin-top: 3px !important;
+      }
+
+      .podium-unit {
+        height: 30px !important;
+        font-size: 6.4px !important;
+        padding: 1px !important;
+      }
+
+      .podium-unit .u-dot {
+        width: 6px !important;
+        height: 6px !important;
+        right: 4px !important;
+        bottom: 4px !important;
+      }
+
+      .tower-unit .u-dot {
+        width: 7px !important;
+        height: 7px !important;
+        right: 6px !important;
+        bottom: 6px !important;
+      }
+
+      .legend {
+        font-size: 8px !important;
+        gap: 8px !important;
+      }
+
+      .unit-modal-card {
+        width: calc(100vw - 26px) !important;
+        margin: 4dvh auto 0 !important;
+        max-width: 390px !important;
+        padding: 16px 14px !important;
+      }
+
+      .unit-modal-card h3 {
+        font-size: 30px !important;
+      }
+
+      .plant-card {
+        width: 100vw !important;
+        height: 100dvh !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+      }
+    }
+
+    /* Orientação clara para corretores: consultar preço e detalhes */
+    .use-hint {
+      display: flex !important;
+      align-items: center !important;
+      gap: 11px !important;
+      margin: 0 0 12px !important;
+      padding: 12px 14px !important;
+      border-radius: 16px !important;
+      background:
+        linear-gradient(135deg, rgba(184,138,74,.16), rgba(255,255,255,.48)),
+        rgba(255,255,255,.42) !important;
+      border: 1px solid rgba(184,138,74,.35) !important;
+      color: #2a2018 !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.62), 0 10px 24px rgba(58,36,18,.08) !important;
+    }
+
+    .use-hint__icon {
+      width: 34px !important;
+      height: 34px !important;
+      flex: 0 0 34px !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border-radius: 50% !important;
+      background: linear-gradient(135deg,#a97836,#d0ad73) !important;
+      color: #17100b !important;
+      font-weight: 900 !important;
+      font-size: 18px !important;
+      box-shadow: 0 8px 18px rgba(132,88,37,.20) !important;
+    }
+
+    .use-hint__text {
+      font-size: 12.5px !important;
+      line-height: 1.35 !important;
+      color: #5d4d3f !important;
+    }
+
+    .use-hint__text strong {
+      display: block !important;
+      color: #1b1511 !important;
+      font-size: 13px !important;
+      margin-bottom: 2px !important;
+    }
+
+    .panel-helper {
+      margin: 8px 0 0 !important;
+      padding: 9px 11px !important;
+      border-radius: 13px !important;
+      background: rgba(184,138,74,.12) !important;
+      border: 1px solid rgba(184,138,74,.22) !important;
+      color: #6a5847 !important;
+      font-size: 11px !important;
+      line-height: 1.35 !important;
+    }
+
+    .tower-unit[data-unit],
+    .podium-unit[data-unit] {
+      position: relative !important;
+    }
+
+    .tower-unit[data-unit]:not(.sold)::after,
+    .podium-unit[data-unit]:not(.sold)::after {
+      content: "Ver preço" !important;
+      position: absolute !important;
+      left: 50% !important;
+      top: -25px !important;
+      transform: translateX(-50%) translateY(4px) !important;
+      padding: 5px 8px !important;
+      border-radius: 999px !important;
+      background: rgba(27,21,17,.92) !important;
+      color: #fff3dd !important;
+      font-size: 9px !important;
+      line-height: 1 !important;
+      letter-spacing: .04em !important;
+      white-space: nowrap !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transition: .18s ease !important;
+      z-index: 8 !important;
+      box-shadow: 0 8px 18px rgba(0,0,0,.18) !important;
+    }
+
+    .tower-unit[data-unit]:not(.sold):hover::after,
+    .podium-unit[data-unit]:not(.sold):hover::after {
+      opacity: 1 !important;
+      transform: translateX(-50%) translateY(0) !important;
+    }
+
+    .tower-unit.is-selected {
+      outline: 2px solid rgba(184,138,74,.55) !important;
+      outline-offset: 2px !important;
+    }
+
+    @media (max-width: 760px) {
+      .use-hint {
+        gap: 9px !important;
+        margin-bottom: 9px !important;
+        padding: 10px 11px !important;
+        border-radius: 14px !important;
+      }
+
+      .use-hint__icon {
+        width: 30px !important;
+        height: 30px !important;
+        flex-basis: 30px !important;
+        font-size: 16px !important;
+      }
+
+      .use-hint__text {
+        font-size: 11px !important;
+      }
+
+      .use-hint__text strong {
+        font-size: 11.5px !important;
+      }
+
+      .tower-unit[data-unit]::after,
+      .podium-unit[data-unit]::after {
+        display: none !important;
+      }
+    }
+
+  </style>
+
 </head>
 <body>
   <main class="page">
@@ -1403,7 +1955,7 @@
         <div class="hero-content">
           <img class="hero-logo" src="logo-renaissance.png" alt="Renaissance Senger">
           <div class="hero-kicker">Disponibilidade</div>
-          <p class="hero-text">Consulte a disponibilidade e visualize cada unidade com mais praticidade.</p>
+          <p class="hero-text">Clique na unidade desejada para ver valor, áreas, status e plantas disponíveis.</p>
         </div>
         <div class="hero-date">Atualizado em 29/04/2026 · Valores e disponibilidade sujeitos a alteração</div>
       </div>
@@ -1415,6 +1967,14 @@
           <div class="tower-tabs">
             <button class="tower-tab active" data-target="tower-3">Apartamentos 3 suítes</button>
             <button class="tower-tab" data-target="tower-2">Apartamentos 2 suítes</button>
+          </div>
+
+          <div class="use-hint" role="note" aria-label="Como consultar valores das unidades">
+            <span class="use-hint__icon">R$</span>
+            <div class="use-hint__text">
+              <strong>Para ver o preço, clique no número da unidade.</strong>
+              A ficha abre com valor, área privativa, área global, status e plantas disponíveis.
+            </div>
           </div>
 
           <div class="tower-panel active" id="tower-3">
@@ -1468,6 +2028,7 @@
 
         <aside class="side-panel" id="unitPanel">
           <div class="tag">Ficha da unidade</div>
+          <div class="panel-helper">Clique em qualquer unidade no mapa para atualizar aqui o preço e os detalhes.</div>
           <h3 id="panelUnit">401</h3>
           <div class="kind" id="panelType">Casa Suspensa</div>
           <div class="sub" id="panelSub">3 suítes</div>
