@@ -1947,62 +1947,103 @@
 
   </style>
 
-
-  <style id="ajuste-banner-compacto-final">
+  <style id="ajuste-banner-corrigido-final">
     /*
-      Ajuste final:
-      - reduz a altura do cabeçalho/banner após remoção da frase
-      - mantém logo, selo de disponibilidade e data
-      - evita área vazia excessiva no topo
+      Ajuste final do cabeçalho:
+      - mantém o banner compacto
+      - posiciona a data abaixo de "Disponibilidade"
+      - evita sobreposição da data sobre a logo
+      - mantém a imagem de fundo visível e elegante
     */
+
     .hero-header{
-      min-height:116px !important;
-      padding:16px 28px 14px !important;
+      min-height:132px !important;
+      padding:18px 28px 16px !important;
       align-items:flex-start !important;
     }
 
     .hero-content{
-      gap:8px !important;
-      max-width:360px !important;
+      gap:7px !important;
+      max-width:520px !important;
+      margin-left:0 !important;
+      padding:0 !important;
+    }
+
+    .hero-content::before{
+      inset:-10px -22px -12px -14px !important;
+      border-radius:18px !important;
+      background:
+        linear-gradient(90deg,
+          rgba(10,7,6,.42) 0%,
+          rgba(10,7,6,.24) 58%,
+          rgba(10,7,6,0) 100%) !important;
     }
 
     .hero-logo{
-      max-width:155px !important;
+      max-width:165px !important;
+      width:165px !important;
+      height:auto !important;
+      display:block !important;
+      margin:0 0 4px 0 !important;
     }
 
     .hero-kicker{
-      margin-top:6px !important;
+      margin-top:0 !important;
       font-size:10px !important;
+      line-height:1.1 !important;
       letter-spacing:.18em !important;
+      color:#e4c389 !important;
     }
 
     .hero-date{
-      top:8px !important;
-      right:28px !important;
-      bottom:auto !important;
-      font-size:9px !important;
+      position:static !important;
+      display:block !important;
+      margin-top:4px !important;
+      max-width:520px !important;
+      text-align:left !important;
+      font-size:10px !important;
+      line-height:1.25 !important;
+      letter-spacing:.01em !important;
+      color:rgba(255,247,235,.78) !important;
+      text-shadow:0 2px 10px rgba(0,0,0,.42) !important;
     }
 
     @media (max-width:760px){
       .hero-header{
-        min-height:98px !important;
-        padding:13px 14px 12px !important;
+        min-height:120px !important;
+        padding:15px 14px 13px !important;
+      }
+
+      .hero-content{
+        max-width:310px !important;
+        gap:6px !important;
+      }
+
+      .hero-content::before{
+        inset:-9px -12px -10px -10px !important;
+        border-radius:15px !important;
+        background:
+          linear-gradient(90deg,
+            rgba(10,7,6,.42) 0%,
+            rgba(10,7,6,.24) 62%,
+            rgba(10,7,6,0) 100%) !important;
       }
 
       .hero-logo{
-        max-width:118px !important;
+        max-width:128px !important;
+        width:128px !important;
+        margin-bottom:3px !important;
       }
 
       .hero-kicker{
-        margin-top:6px !important;
         font-size:8px !important;
+        letter-spacing:.15em !important;
       }
 
       .hero-date{
-        top:7px !important;
-        right:12px !important;
-        font-size:7.5px !important;
-        max-width:180px !important;
+        font-size:8px !important;
+        max-width:300px !important;
+        margin-top:3px !important;
       }
     }
   </style>
