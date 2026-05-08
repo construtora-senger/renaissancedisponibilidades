@@ -1,0 +1,15 @@
+PACOTE PARA GITHUB - RENAISSANCE
+
+Subir todos os arquivos desta pasta na raiz do repositório.
+
+IMPORTANTE:
+- Não alterei os nomes das imagens enviadas.
+- O HTML referencia os arquivos exatamente com estes nomes:
+  FINAL 04 - PLANTA HUMANIZADA.png
+  FINAL 02 FRENTE- PLANTA HUMANIZADA.png
+  FINAL 01 FRENTE- PLANTA HUMANIZADA.png
+  Planta humanizada 3 suites superior.png
+  FINAL 01 SUPERIOR - PLANTA HUMANIZADA.png
+
+Também mantenha na raiz as imagens que já existiam antes no projeto, como:
+A05.jpg, A06.jpg, A07.jpg, A08.jpg, A09.jpg, topo-subliminar.jpg e 2 suites final 3.jpeg.
