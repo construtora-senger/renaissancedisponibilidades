@@ -233,6 +233,88 @@
     .lg{display:flex;align-items:center;gap:8px}
     .dot{width:12px;height:12px;border-radius:50%}
 
+
+    .availability-counter{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:10px;
+      margin:12px 0 14px;
+    }
+    .availability-counter__item{
+      border:1px solid rgba(184,138,74,.22);
+      border-radius:16px;
+      padding:11px 12px;
+      background:rgba(255,255,255,.46);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.62);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      min-width:0;
+    }
+    .availability-counter__label{
+      font-size:10px;
+      line-height:1.15;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:#786755;
+      font-weight:800;
+    }
+    .availability-counter__value{
+      font-size:24px;
+      line-height:1;
+      font-weight:900;
+      color:#17100b;
+      letter-spacing:-.04em;
+      font-family:Georgia,'Times New Roman',serif;
+    }
+    .availability-counter__item.available{border-color:rgba(47,138,76,.30)}
+    .availability-counter__item.reserved{border-color:rgba(184,138,74,.34)}
+    .availability-counter__item.sold{border-color:rgba(178,80,89,.28)}
+
+    .btn-back-presentation{
+      position:absolute;
+      right:28px;
+      bottom:18px;
+      z-index:3;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 15px;
+      border-radius:999px;
+      border:1px solid rgba(228,195,137,.38);
+      background:rgba(18,13,9,.48);
+      color:#fff3de;
+      text-decoration:none;
+      font-size:10px;
+      font-weight:850;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      backdrop-filter:blur(8px);
+      box-shadow:0 10px 24px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.12);
+    }
+    .btn-back-presentation:hover{
+      border-color:rgba(228,195,137,.62);
+      background:rgba(18,13,9,.62);
+    }
+
+    .side-panel.is-empty .unit-content{display:none}
+    .side-panel.is-empty h3{
+      font-family:Georgia,'Times New Roman',serif;
+      font-size:32px;
+      line-height:1.08;
+      margin-top:18px;
+      color:#15100d;
+    }
+    .side-panel.is-empty .kind{
+      font-size:16px;
+      line-height:1.42;
+      font-family:inherit;
+      color:#6a5847;
+    }
+
     .side-panel{padding:24px;position:sticky;top:24px}
     .tag{
       display:inline-flex;padding:8px 12px;border-radius:999px;background:#efe7dc;color:#6f5f50;
@@ -273,20 +355,44 @@
     .plant-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.62)}
     .plant-card{
       position:relative;z-index:1;width:min(96vw,1200px);height:min(90vh,950px);margin:3vh auto 0;
-      padding:64px 14px 14px;background:#111;border-radius:22px;overflow:auto;
+      padding:14px;background:#111;border-radius:22px;overflow:hidden;
       box-shadow:0 24px 70px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.08);
+      display:flex;flex-direction:column;gap:12px;-webkit-overflow-scrolling:touch;
+    }
+    .plant-toolbar{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:0 52px 0 0;
+    }
+    .plant-toolbar-left{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .plant-tool-btn{
+      min-width:40px;height:40px;padding:0 12px;border-radius:999px;border:1px solid rgba(255,255,255,.14);
+      background:#fff;color:#111;font-size:22px;font-weight:700;cursor:pointer
+    }
+    .plant-tool-btn.reset{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:800}
+    .plant-zoom-label{
+      color:#fff;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+      padding:0 6px;min-width:64px;text-align:center
+    }
+    .plant-tip{
+      color:rgba(255,255,255,.72);font-size:12px;line-height:1.35;text-align:right
+    }
+    .plant-viewport{
+      flex:1;overflow:auto;background:#1a1a1a;border-radius:16px;padding:12px;
       display:flex;align-items:flex-start;justify-content:center;-webkit-overflow-scrolling:touch;
-      touch-action:pan-x pan-y pinch-zoom;
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .plant-stage{
+      min-width:100%;display:flex;justify-content:center;
     }
     .plant-close{
       position:absolute;top:10px;right:10px;z-index:2;width:42px;height:42px;border:0;border-radius:50%;
       background:rgba(255,255,255,.96);color:#111;cursor:pointer;font-size:24px;line-height:1;box-shadow:0 8px 18px rgba(0,0,0,.18)
     }
     .plant-image{
-      display:block;background:#fff;width:auto;max-width:100%;max-height:none;height:auto;margin:0 auto;
+      display:block;background:#fff;width:auto;max-width:none;max-height:none;height:auto;margin:0 auto;
       box-shadow:0 10px 28px rgba(0,0,0,.28);
       object-fit:contain;
-      transform-origin:center top;
+      image-rendering:auto;
     }
 
     @media (max-width:900px){
@@ -321,6 +427,7 @@
       .hero-kicker{font-size:10px;letter-spacing:.14em}
       .hero-text{font-size:14px;max-width:240px;line-height:1.42}
       .hero-date{font-size:10px;right:16px;bottom:12px;max-width:185px}
+      .btn-back-presentation{right:14px;bottom:12px;padding:8px 10px;font-size:8px;letter-spacing:.08em}
       .tower-card{padding:16px 10px 18px}
       .tower-tabs{grid-template-columns:1fr;gap:10px}
       .tower-tab{width:100%;min-width:0;padding:12px 10px;font-size:11px;letter-spacing:.08em;line-height:1.2;text-align:center}
@@ -339,6 +446,9 @@
       .unit-modal-card h3{font-size:38px;line-height:.95}
       .unit-modal-card .kind{font-size:20px}
       .unit-modal-card .sub{font-size:14px}
+      .plant-card{width:min(calc(100vw - 16px),1200px);height:min(92vh,950px);margin:2vh auto 0;padding:12px}
+      .plant-toolbar{align-items:flex-start;gap:8px;padding-right:48px;flex-direction:column}
+      .plant-tip{text-align:left}
       .detail-list div{gap:10px}
       .detail-list strong{font-size:14px}
       .price strong{font-size:28px}
@@ -2105,6 +2215,7 @@
           <div class="hero-date-inline">Atualizado em 05/05/2026 · Valores e disponibilidade sujeitos a alteração</div>
           
         </div>
+        <a class="btn-back-presentation" href="https://construtora-senger.github.io/renaissanceapresentacao/">← Apresentação</a>
       </div>
     </header>
 
@@ -2116,12 +2227,19 @@
             <button class="tower-tab" data-target="tower-2">Apartamentos 2 suítes</button>
           </div>
 
+
           <div class="use-hint" role="note" aria-label="Como consultar valores das unidades">
             <span class="use-hint__icon">R$</span>
             <div class="use-hint__text">
-              <strong>Para ver o preço, clique no número da unidade.</strong>
+              <strong>Para consultar, clique no número da unidade.</strong>
               A ficha abre com valor, área privativa, área global, status e plantas disponíveis.
             </div>
+          </div>
+
+          <div class="availability-counter" aria-label="Resumo de disponibilidade">
+            <div class="availability-counter__item available"><span class="availability-counter__label">Disponíveis</span><strong class="availability-counter__value" id="countAvailable">0</strong></div>
+            <div class="availability-counter__item reserved"><span class="availability-counter__label">Reservadas</span><strong class="availability-counter__value" id="countReserved">0</strong></div>
+            <div class="availability-counter__item sold"><span class="availability-counter__label">Vendidas</span><strong class="availability-counter__value" id="countSold">0</strong></div>
           </div>
 
           <div class="tower-panel active" id="tower-3">
@@ -2173,24 +2291,26 @@
           </div>
         </div>
 
-        <aside class="side-panel" id="unitPanel">
+        <aside class="side-panel is-empty" id="unitPanel">
           <div class="tag">Ficha da unidade</div>
-          <div class="panel-helper">Clique em qualquer unidade no mapa para atualizar aqui o preço e os detalhes.</div>
-          <h3 id="panelUnit">401</h3>
-          <div class="kind" id="panelType">Casa Suspensa</div>
-          <div class="sub" id="panelSub">3 suítes</div>
-          <div class="detail-list">
-            <div><span>Andar</span><strong id="panelFloor">4º andar</strong></div>
-            <div><span>Posição</span><strong id="panelPos">Frente direita</strong></div>
-            <div><span>Área privativa</span><strong id="panelPriv">258,94 m²</strong></div>
-            <div><span>Área global</span><strong id="panelGlobal">359,60 m²</strong></div>
-            <div><span>Situação</span><strong id="panelStatus">Disponível</strong></div>
-          </div>
-          <div class="price"><small>Valor</small><strong id="panelPrice">R$ 1.490.000,00</strong></div>
-          <div class="price-note">*Valor sem box de garagem</div>
-          <div class="btn-row btn-row--single">
-            <a class="btn btn-light btn-disabled" href="#" id="panelPlant" aria-disabled="true">Planta técnica</a>
-            <a class="btn btn-light btn-disabled" href="#" id="panelHumanizedPlant" aria-disabled="true">Planta humanizada</a>
+          <div class="panel-helper">Clique em qualquer unidade no mapa para abrir o preço, áreas, situação e plantas disponíveis.</div>
+          <h3 id="panelUnit">Selecione uma unidade</h3>
+          <div class="kind" id="panelType">A consulta aparece aqui depois do clique.</div>
+          <div class="sub" id="panelSub"></div>
+          <div class="unit-content">
+            <div class="detail-list">
+              <div><span>Andar</span><strong id="panelFloor"></strong></div>
+              <div><span>Posição</span><strong id="panelPos"></strong></div>
+              <div><span>Área privativa</span><strong id="panelPriv"></strong></div>
+              <div><span>Área global</span><strong id="panelGlobal"></strong></div>
+              <div><span>Situação</span><strong id="panelStatus"></strong></div>
+            </div>
+            <div class="price"><small>Valor</small><strong id="panelPrice"></strong></div>
+            <div class="price-note">Valor da unidade sem box de garagem. Consulte opções de box disponíveis.</div>
+            <div class="btn-row btn-row--single">
+              <a class="btn btn-light btn-disabled" href="#" id="panelPlant" aria-disabled="true">Planta técnica</a>
+              <a class="btn btn-light btn-disabled" href="#" id="panelHumanizedPlant" aria-disabled="true">Planta humanizada</a>
+            </div>
           </div>
         </aside>
       </div>
@@ -2213,7 +2333,7 @@
         <div><span>Situação</span><strong id="modalStatus">Disponível</strong></div>
       </div>
       <div class="price"><small>Valor</small><strong id="modalPrice">R$ 1.490.000,00</strong></div>
-      <div class="price-note">*Valor sem box de garagem</div>
+      <div class="price-note">Valor da unidade sem box de garagem. Consulte opções de box disponíveis.</div>
       <div class="btn-row btn-row--single">
         <a class="btn btn-light btn-disabled" href="#" id="modalPlant" aria-disabled="true">Planta técnica</a>
         <a class="btn btn-light btn-disabled" href="#" id="modalHumanizedPlant" aria-disabled="true">Planta humanizada</a>
@@ -2226,57 +2346,70 @@
     <div class="plant-backdrop" data-close-plant></div>
     <div class="plant-card">
       <button class="plant-close" type="button" aria-label="Fechar planta" data-close-plant>&times;</button>
-      <img class="plant-image" id="plantImage" alt="Planta da unidade">
+      <div class="plant-toolbar">
+        <div class="plant-toolbar-left">
+          <button class="plant-tool-btn" type="button" id="zoomOutBtn" aria-label="Reduzir zoom">−</button>
+          <div class="plant-zoom-label" id="plantZoomLabel">100%</div>
+          <button class="plant-tool-btn" type="button" id="zoomInBtn" aria-label="Aumentar zoom">+</button>
+          <button class="plant-tool-btn reset" type="button" id="zoomResetBtn">Ajustar</button>
+        </div>
+        <div class="plant-tip">Use + e − para ampliar a planta em etapas.<br>No celular, amplie pelos botões e arraste para navegar.</div>
+      </div>
+      <div class="plant-viewport" id="plantViewport">
+        <div class="plant-stage">
+          <img class="plant-image" id="plantImage" alt="Planta da unidade">
+        </div>
+      </div>
     </div>
   </div>
 
   <script>
     /* Dados das unidades. Para alterar valores/status/plantas, edite somente este bloco. */
     const UNIT_DATA = {
-      "401": { floor:"4", type:"Casa Suspensa", sub:"3 suítes", area_global:"359,60 m²", area_priv:"258,94 m²", price:"R$ 1.490.000,00", status:"av", position:"Frente direita", plant:"A05.jpg" },
-      "402": { floor:"4", type:"Casa Suspensa", sub:"3 suítes", area_global:"386,43 m²", area_priv:"280,12 m²", price:"R$ 1.490.000,00", status:"av", position:"Frente esquerda", plant:"A05.jpg" },
-      "501": { floor:"5", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente direita", plant:"A06.jpg", humanized:"FINAL 01 FRENTE- PLANTA HUMANIZADA.png" },
-      "502": { floor:"5", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente esquerda", plant:"A06.jpg" , humanized:"FINAL 02 FRENTE- PLANTA HUMANIZADA.png"},
-      "503": { floor:"5", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral esquerda", plant:"A06.jpg" , humanized:"2 suites final 3.jpeg" },
-      "504": { floor:"5", type:"Casa Suspensa", sub:"2 suítes", area_global:"205,98 m²", area_priv:"146,24 m²", price:"R$ 880.000,00", status:"av", position:"Lateral direita", plant:"A06.jpg" },
-      "601": { floor:"6", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente direita", plant:"A07.jpg", humanized:"FINAL 01 FRENTE- PLANTA HUMANIZADA.png" },
-      "602": { floor:"6", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" , humanized:"FINAL 02 FRENTE- PLANTA HUMANIZADA.png"},
-      "603": { floor:"6", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"2 suites final 3.jpeg" },
-      "604": { floor:"6", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg", humanized:"FINAL 04 - PLANTA HUMANIZADA.png" },
-      "701": { floor:"7", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente direita", plant:"A07.jpg", humanized:"FINAL 01 FRENTE- PLANTA HUMANIZADA.png" },
-      "702": { floor:"7", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" , humanized:"FINAL 02 FRENTE- PLANTA HUMANIZADA.png"},
-      "703": { floor:"7", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"2 suites final 3.jpeg" },
-      "704": { floor:"7", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg", humanized:"FINAL 04 - PLANTA HUMANIZADA.png" },
-      "801": { floor:"8", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente direita", plant:"A07.jpg", humanized:"FINAL 01 FRENTE- PLANTA HUMANIZADA.png" },
-      "802": { floor:"8", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" , humanized:"FINAL 02 FRENTE- PLANTA HUMANIZADA.png"},
-      "803": { floor:"8", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"res", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"2 suites final 3.jpeg" },
-      "804": { floor:"8", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg", humanized:"FINAL 04 - PLANTA HUMANIZADA.png" },
-      "901": { floor:"9", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente direita", plant:"A07.jpg", humanized:"FINAL 01 FRENTE- PLANTA HUMANIZADA.png" },
-      "902": { floor:"9", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" , humanized:"FINAL 02 FRENTE- PLANTA HUMANIZADA.png"},
-      "903": { floor:"9", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"2 suites final 3.jpeg" },
-      "904": { floor:"9", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg", humanized:"FINAL 04 - PLANTA HUMANIZADA.png" },
-      "1001": { floor:"10", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente direita", plant:"A07.jpg", humanized:"FINAL 01 FRENTE- PLANTA HUMANIZADA.png" },
-      "1002": { floor:"10", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" , humanized:"FINAL 02 FRENTE- PLANTA HUMANIZADA.png"},
-      "1003": { floor:"10", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"2 suites final 3.jpeg" },
-      "1004": { floor:"10", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg", humanized:"FINAL 04 - PLANTA HUMANIZADA.png" },
-      "1101": { floor:"11", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.150.000,00", status:"av", position:"Frente direita", plant:"A07.jpg", humanized:"FINAL 01 FRENTE- PLANTA HUMANIZADA.png" },
-      "1102": { floor:"11", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.150.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" , humanized:"FINAL 02 FRENTE- PLANTA HUMANIZADA.png"},
-      "1103": { floor:"11", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 790.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"2 suites final 3.jpeg" },
-      "1104": { floor:"11", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 790.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg", humanized:"FINAL 04 - PLANTA HUMANIZADA.png" },
-      "1201": { floor:"12", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.200.000,00", status:"av", position:"Frente direita", plant:"A07.jpg", humanized:"FINAL 01 FRENTE- PLANTA HUMANIZADA.png" },
-      "1202": { floor:"12", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.200.000,00", status:"av", position:"Frente esquerda", plant:"A07.jpg" , humanized:"FINAL 02 FRENTE- PLANTA HUMANIZADA.png"},
-      "1203": { floor:"12", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 800.000,00", status:"av", position:"Lateral esquerda", plant:"A07.jpg" , humanized:"2 suites final 3.jpeg" },
-      "1204": { floor:"12", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 800.000,00", status:"av", position:"Lateral direita", plant:"A07.jpg", humanized:"FINAL 04 - PLANTA HUMANIZADA.png" },
-      "1301": { floor:"13", type:"Casa Suspensa", sub:"3 suítes", area_global:"307,01 m²", area_priv:"208,81 m²", price:"R$ 1.590.000,00", status:"av", position:"Frente direita", plant:"A08.jpg" },
-      "1302": { floor:"13", type:"Casa Suspensa", sub:"3 suítes", area_global:"307,01 m²", area_priv:"208,81 m²", price:"R$ 1.590.000,00", status:"av", position:"Frente esquerda", plant:"A08.jpg" },
-      "1401": { floor:"14", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente direita", plant:"A09.jpg", humanized:"FINAL 01 SUPERIOR - PLANTA HUMANIZADA.png" },
-      "1402": { floor:"14", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente esquerda", plant:"A09.jpg", humanized:"Planta humanizada 3 suites superior.png" },
-      "1501": { floor:"15", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente direita", plant:"A09.jpg", humanized:"FINAL 01 SUPERIOR - PLANTA HUMANIZADA.png" },
-      "1502": { floor:"15", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente esquerda", plant:"A09.jpg", humanized:"Planta humanizada 3 suites superior.png" },
-      "1601": { floor:"16", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente direita", plant:"A09.jpg", humanized:"FINAL 01 SUPERIOR - PLANTA HUMANIZADA.png" },
-      "1602": { floor:"16", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente esquerda", plant:"A09.jpg", humanized:"Planta humanizada 3 suites superior.png" },
-      "1701": { floor:"17", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente direita", plant:"A09.jpg", humanized:"FINAL 01 SUPERIOR - PLANTA HUMANIZADA.png" },
-      "1702": { floor:"17", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente esquerda", plant:"A09.jpg", humanized:"Planta humanizada 3 suites superior.png" },
+      "401": { floor:"4", type:"Casa Suspensa", sub:"3 suítes", area_global:"359,60 m²", area_priv:"258,94 m²", price:"R$ 1.490.000,00", status:"av", position:"Frente direita", plant:"A05.pdf" },
+      "402": { floor:"4", type:"Casa Suspensa", sub:"3 suítes", area_global:"386,43 m²", area_priv:"280,12 m²", price:"R$ 1.490.000,00", status:"av", position:"Frente esquerda", plant:"A05.pdf" },
+      "501": { floor:"5", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente direita", plant:"A06.pdf", humanized:"FINAL 01 FRENTE- PLANTA HUMANIZADA.png" },
+      "502": { floor:"5", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente esquerda", plant:"A06.pdf" , humanized:"FINAL 02 FRENTE- PLANTA HUMANIZADA.png"},
+      "503": { floor:"5", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral esquerda", plant:"A06.pdf" , humanized:"2 suites final 3.jpeg" },
+      "504": { floor:"5", type:"Casa Suspensa", sub:"2 suítes", area_global:"205,98 m²", area_priv:"146,24 m²", price:"R$ 880.000,00", status:"av", position:"Lateral direita", plant:"A06.pdf" },
+      "601": { floor:"6", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente direita", plant:"A07.pdf", humanized:"FINAL 01 FRENTE- PLANTA HUMANIZADA.png" },
+      "602": { floor:"6", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.080.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" , humanized:"FINAL 02 FRENTE- PLANTA HUMANIZADA.png"},
+      "603": { floor:"6", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" , humanized:"2 suites final 3.jpeg" },
+      "604": { floor:"6", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 730.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf", humanized:"FINAL 04 - PLANTA HUMANIZADA.png" },
+      "701": { floor:"7", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente direita", plant:"A07.pdf", humanized:"FINAL 01 FRENTE- PLANTA HUMANIZADA.png" },
+      "702": { floor:"7", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" , humanized:"FINAL 02 FRENTE- PLANTA HUMANIZADA.png"},
+      "703": { floor:"7", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" , humanized:"2 suites final 3.jpeg" },
+      "704": { floor:"7", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf", humanized:"FINAL 04 - PLANTA HUMANIZADA.png" },
+      "801": { floor:"8", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente direita", plant:"A07.pdf", humanized:"FINAL 01 FRENTE- PLANTA HUMANIZADA.png" },
+      "802": { floor:"8", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.100.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" , humanized:"FINAL 02 FRENTE- PLANTA HUMANIZADA.png"},
+      "803": { floor:"8", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"res", position:"Lateral esquerda", plant:"A07.pdf" , humanized:"2 suites final 3.jpeg" },
+      "804": { floor:"8", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 750.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf", humanized:"FINAL 04 - PLANTA HUMANIZADA.png" },
+      "901": { floor:"9", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente direita", plant:"A07.pdf", humanized:"FINAL 01 FRENTE- PLANTA HUMANIZADA.png" },
+      "902": { floor:"9", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" , humanized:"FINAL 02 FRENTE- PLANTA HUMANIZADA.png"},
+      "903": { floor:"9", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" , humanized:"2 suites final 3.jpeg" },
+      "904": { floor:"9", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf", humanized:"FINAL 04 - PLANTA HUMANIZADA.png" },
+      "1001": { floor:"10", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente direita", plant:"A07.pdf", humanized:"FINAL 01 FRENTE- PLANTA HUMANIZADA.png" },
+      "1002": { floor:"10", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.130.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" , humanized:"FINAL 02 FRENTE- PLANTA HUMANIZADA.png"},
+      "1003": { floor:"10", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" , humanized:"2 suites final 3.jpeg" },
+      "1004": { floor:"10", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 780.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf", humanized:"FINAL 04 - PLANTA HUMANIZADA.png" },
+      "1101": { floor:"11", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.150.000,00", status:"av", position:"Frente direita", plant:"A07.pdf", humanized:"FINAL 01 FRENTE- PLANTA HUMANIZADA.png" },
+      "1102": { floor:"11", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.150.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" , humanized:"FINAL 02 FRENTE- PLANTA HUMANIZADA.png"},
+      "1103": { floor:"11", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 790.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" , humanized:"2 suites final 3.jpeg" },
+      "1104": { floor:"11", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 790.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf", humanized:"FINAL 04 - PLANTA HUMANIZADA.png" },
+      "1201": { floor:"12", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.200.000,00", status:"av", position:"Frente direita", plant:"A07.pdf", humanized:"FINAL 01 FRENTE- PLANTA HUMANIZADA.png" },
+      "1202": { floor:"12", type:"3 suítes frente", sub:"", area_global:"180,41 m²", area_priv:"117,62 m²", price:"R$ 1.200.000,00", status:"av", position:"Frente esquerda", plant:"A07.pdf" , humanized:"FINAL 02 FRENTE- PLANTA HUMANIZADA.png"},
+      "1203": { floor:"12", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 800.000,00", status:"av", position:"Lateral esquerda", plant:"A07.pdf" , humanized:"2 suites final 3.jpeg" },
+      "1204": { floor:"12", type:"2 suítes", sub:"", area_global:"130,37 m²", area_priv:"86,56 m²", price:"R$ 800.000,00", status:"av", position:"Lateral direita", plant:"A07.pdf", humanized:"FINAL 04 - PLANTA HUMANIZADA.png" },
+      "1301": { floor:"13", type:"Casa Suspensa", sub:"3 suítes", area_global:"307,01 m²", area_priv:"208,81 m²", price:"R$ 1.590.000,00", status:"av", position:"Frente direita", plant:"A08.pdf" },
+      "1302": { floor:"13", type:"Casa Suspensa", sub:"3 suítes", area_global:"307,01 m²", area_priv:"208,81 m²", price:"R$ 1.590.000,00", status:"av", position:"Frente esquerda", plant:"A08.pdf" },
+      "1401": { floor:"14", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente direita", plant:"A09.pdf", humanized:"FINAL 01 SUPERIOR - PLANTA HUMANIZADA.png" },
+      "1402": { floor:"14", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente esquerda", plant:"A09.pdf", humanized:"Planta humanizada 3 suites superior.png" },
+      "1501": { floor:"15", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente direita", plant:"A09.pdf", humanized:"FINAL 01 SUPERIOR - PLANTA HUMANIZADA.png" },
+      "1502": { floor:"15", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.450.000,00", status:"av", position:"Frente esquerda", plant:"A09.pdf", humanized:"Planta humanizada 3 suites superior.png" },
+      "1601": { floor:"16", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente direita", plant:"A09.pdf", humanized:"FINAL 01 SUPERIOR - PLANTA HUMANIZADA.png" },
+      "1602": { floor:"16", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente esquerda", plant:"A09.pdf", humanized:"Planta humanizada 3 suites superior.png" },
+      "1701": { floor:"17", type:"Superior direita", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente direita", plant:"A09.pdf", humanized:"FINAL 01 SUPERIOR - PLANTA HUMANIZADA.png" },
+      "1702": { floor:"17", type:"Superior esquerda", sub:"3 suítes", area_global:"243,43 m²", area_priv:"158,71 m²", price:"R$ 1.530.000,00", status:"av", position:"Frente esquerda", plant:"A09.pdf", humanized:"Planta humanizada 3 suites superior.png" },
       "1801": { floor:"18", type:"Unidade exclusiva", sub:"4 suítes", area_global:"380,57 m²", area_priv:"316,71 m²", price:"Vendido", status:"sold", position:"Pavimento único", plant:"#" },
       "Sala 01": { floor:"T", type:"Sala comercial", sub:"Sala comercial", area_global:"201,06 m²", area_priv:"131,09 m²", price:"Vendido", status:"sold", position:"Térreo", plant:"#" },
       "Sala 02": { floor:"T", type:"Sala comercial", sub:"Sala comercial", area_global:"177,72 m²", area_priv:"115,87 m²", price:"Vendido", status:"sold", position:"Térreo", plant:"#" },
@@ -2286,11 +2419,27 @@
 
     const statusMap = { av:'Disponível', res:'Reservado', sold:'Vendido' };
 
+    function updateAvailabilityCounter(){
+      const counts = Object.values(UNIT_DATA).reduce((acc, unit) => {
+        acc[unit.status] = (acc[unit.status] || 0) + 1;
+        return acc;
+      }, { av:0, res:0, sold:0 });
+
+      const refs = { countAvailable: counts.av || 0, countReserved: counts.res || 0, countSold: counts.sold || 0 };
+      Object.entries(refs).forEach(([id, value]) => {
+        const el = document.getElementById(id);
+        if(el) el.textContent = value;
+      });
+    }
+
     function formatFloor(f){ return f === 'T' ? 'Térreo' : `${f}º andar`; }
 
     function updateUnitPanel(unitId){
       const unit = UNIT_DATA[unitId];
       if(!unit) return;
+
+      const panel = document.getElementById('unitPanel');
+      if(panel) panel.classList.remove('is-empty');
 
       document.querySelectorAll('.tower-unit, .podium-unit').forEach(el => el.classList.remove('is-selected'));
       const safeUnitId = window.CSS && CSS.escape ? CSS.escape(unitId) : unitId.replace(/"/g, '\\"');
@@ -2328,10 +2477,15 @@
         el.href = hasPlant ? plant : '#';
         el.classList.toggle('btn-disabled', !hasPlant);
         el.setAttribute('aria-disabled', hasPlant ? 'false' : 'true');
-        el.textContent = hasPlant ? 'Planta técnica' : 'Planta técnica em breve';
+        el.textContent = hasPlant ? 'Abrir planta técnica em PDF' : 'Planta técnica em breve';
         el.style.display = '';
-        el.removeAttribute('target');
-        el.removeAttribute('rel');
+        if(hasPlant) {
+          el.setAttribute('target', '_blank');
+          el.setAttribute('rel', 'noopener');
+        } else {
+          el.removeAttribute('target');
+          el.removeAttribute('rel');
+        }
       });
 
       const humanizedPlant = unit.humanized || '#';
@@ -2380,12 +2534,77 @@
     });
 
 
+    const plantZoom = {
+      zoomLevel: 1,
+      minZoom: 1,
+      maxZoom: 3,
+      fitWidth: 0,
+      naturalWidth: 0,
+      naturalHeight: 0
+    };
+
+    function updatePlantZoomLabel(){
+      const label = document.getElementById('plantZoomLabel');
+      if(label) label.textContent = `${Math.round(plantZoom.zoomLevel * 100)}%`;
+    }
+
+    function renderPlantScale(){
+      const image = document.getElementById('plantImage');
+      if(!image || !plantZoom.fitWidth) return;
+      const width = Math.round(plantZoom.fitWidth * plantZoom.zoomLevel);
+      image.style.width = `${width}px`;
+      updatePlantZoomLabel();
+    }
+
+    function fitPlantToViewport(){
+      const viewport = document.getElementById('plantViewport');
+      const image = document.getElementById('plantImage');
+      if(!viewport || !image || !plantZoom.naturalWidth || !plantZoom.naturalHeight) return;
+
+      const vw = Math.max(viewport.clientWidth - 24, 120);
+      const vh = Math.max(viewport.clientHeight - 24, 120);
+      const fitScale = Math.min(vw / plantZoom.naturalWidth, vh / plantZoom.naturalHeight, 1);
+
+      plantZoom.fitWidth = Math.round(plantZoom.naturalWidth * fitScale);
+      plantZoom.zoomLevel = 1;
+
+      renderPlantScale();
+      viewport.scrollTop = 0;
+      viewport.scrollLeft = 0;
+    }
+
+    function changePlantZoom(step){
+      const viewport = document.getElementById('plantViewport');
+      const beforeWidth = plantZoom.fitWidth * plantZoom.zoomLevel;
+      const beforeLeft = viewport ? viewport.scrollLeft : 0;
+      const beforeTop = viewport ? viewport.scrollTop : 0;
+
+      const next = Math.max(plantZoom.minZoom, Math.min(plantZoom.maxZoom, plantZoom.zoomLevel + step));
+      if(Math.abs(next - plantZoom.zoomLevel) < 0.001) return;
+
+      plantZoom.zoomLevel = next;
+      renderPlantScale();
+
+      if(viewport && beforeWidth > 0){
+        const afterWidth = plantZoom.fitWidth * plantZoom.zoomLevel;
+        const ratio = afterWidth / beforeWidth;
+        viewport.scrollLeft = Math.max((beforeLeft + viewport.clientWidth / 2) * ratio - viewport.clientWidth / 2, 0);
+        viewport.scrollTop = Math.max((beforeTop + viewport.clientHeight / 2) * ratio - viewport.clientHeight / 2, 0);
+      }
+    }
+
     function openPlantModal(url, label){
       const modal = document.getElementById('plantModal');
       const image = document.getElementById('plantImage');
       if(!modal || !image || !url || url === '#') return;
 
       const absoluteUrl = new URL(url, window.location.href).href;
+      image.onload = () => {
+        plantZoom.naturalWidth = image.naturalWidth || 0;
+        plantZoom.naturalHeight = image.naturalHeight || 0;
+        plantZoom.maxZoom = plantZoom.naturalWidth >= 3500 ? 3 : 3.5;
+        fitPlantToViewport();
+      };
       image.src = absoluteUrl;
       image.alt = label ? `Planta da unidade ${label}` : 'Planta da unidade';
       modal.classList.add('open');
@@ -2395,12 +2614,43 @@
     function closePlantModal(){
       const modal = document.getElementById('plantModal');
       const image = document.getElementById('plantImage');
+      const viewport = document.getElementById('plantViewport');
       if(modal) modal.classList.remove('open');
-      if(image) image.src = '';
+      if(image) {
+        image.src = '';
+        image.style.width = '';
+      }
+      if(viewport){
+        viewport.scrollTop = 0;
+        viewport.scrollLeft = 0;
+      }
+      plantZoom.zoomLevel = 1;
+      plantZoom.minZoom = 1;
+      plantZoom.maxZoom = 3;
+      plantZoom.fitWidth = 0;
+      plantZoom.naturalWidth = 0;
+      plantZoom.naturalHeight = 0;
+      updatePlantZoomLabel();
       document.body.style.overflow = '';
     }
 
     document.querySelectorAll('[data-close-plant]').forEach(el => el.addEventListener('click', closePlantModal));
+
+    document.getElementById('zoomInBtn')?.addEventListener('click', () => changePlantZoom(0.35));
+    document.getElementById('zoomOutBtn')?.addEventListener('click', () => changePlantZoom(-0.35));
+    document.getElementById('zoomResetBtn')?.addEventListener('click', fitPlantToViewport);
+
+    document.getElementById('plantViewport')?.addEventListener('wheel', (event) => {
+      if(!document.getElementById('plantModal')?.classList.contains('open')) return;
+      event.preventDefault();
+      changePlantZoom(event.deltaY < 0 ? 0.25 : -0.25);
+    }, { passive:false });
+
+    window.addEventListener('resize', () => {
+      if(document.getElementById('plantModal')?.classList.contains('open')) {
+        fitPlantToViewport();
+      }
+    });
 
     document.addEventListener('keydown', (event) => {
       if(event.key === 'Escape') closePlantModal();
@@ -2409,13 +2659,22 @@
     document.addEventListener('click', (event) => {
       const trigger = event.target.closest('#panelPlant, #modalPlant, #panelHumanizedPlant, #modalHumanizedPlant');
       if(!trigger || trigger.classList.contains('btn-disabled')) return;
-      event.preventDefault();
+
       const href = trigger.getAttribute('href');
+      if(!href || href === '#') return;
+
+      const isTechnicalPdf = trigger.id === 'panelPlant' || trigger.id === 'modalPlant';
+      if(isTechnicalPdf) {
+        // Plantas técnicas abrem em PDF original, com zoom nativo do navegador.
+        return;
+      }
+
+      event.preventDefault();
       const label = document.getElementById('panelUnit')?.textContent || document.getElementById('modalUnit')?.textContent || '';
-      if(href && href !== '#') openPlantModal(href, label);
+      openPlantModal(href, label);
     });
 
-    updateUnitPanel('401');
+    updateAvailabilityCounter();
   </script>
 </body>
 </html>
