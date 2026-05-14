@@ -2204,6 +2204,62 @@
     }
   </style>
 
+
+
+  <style id="ajuste-mobile-contadores-disponibilidade">
+    /* Correção mobile: evita amontoamento de texto e números nos contadores */
+    @media (max-width:760px){
+      .availability-counter{
+        grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+        gap:8px !important;
+        margin:12px 0 14px !important;
+      }
+      .availability-counter__item{
+        min-height:72px !important;
+        padding:10px 5px 9px !important;
+        border-radius:15px !important;
+        display:flex !important;
+        flex-direction:column !important;
+        align-items:center !important;
+        justify-content:center !important;
+        gap:5px !important;
+        text-align:center !important;
+        overflow:hidden !important;
+      }
+      .availability-counter__label{
+        width:100% !important;
+        display:block !important;
+        font-size:9px !important;
+        line-height:1.05 !important;
+        letter-spacing:.13em !important;
+        white-space:normal !important;
+        word-break:normal !important;
+        overflow-wrap:normal !important;
+      }
+      .availability-counter__value{
+        width:100% !important;
+        display:block !important;
+        font-size:28px !important;
+        line-height:.95 !important;
+        letter-spacing:-.04em !important;
+        text-align:center !important;
+      }
+    }
+
+    @media (max-width:390px){
+      .availability-counter{gap:6px !important}
+      .availability-counter__item{
+        min-height:68px !important;
+        padding:9px 4px 8px !important;
+      }
+      .availability-counter__label{
+        font-size:8px !important;
+        letter-spacing:.11em !important;
+      }
+      .availability-counter__value{font-size:26px !important}
+    }
+  </style>
+
 </head>
 <body>
   <main class="page">
