@@ -2525,6 +2525,18 @@
         if(el) el.style.display = unit.sub ? '' : 'none';
       });
 
+      ['panelPrice','modalPrice'].forEach(id => {
+        const el = document.getElementById(id);
+        if(!el) return;
+        const priceBox = el.closest('.price');
+        if(!priceBox) return;
+        priceBox.style.display = unit.status === 'sold' ? 'none' : '';
+        const note = priceBox.nextElementSibling;
+        if(note && note.classList.contains('price-note')){
+          note.style.display = unit.status === 'sold' ? 'none' : '';
+        }
+      });
+
       const plant = unit.plant || '#';
       const hasPlant = plant && plant !== '#';
       ['panelPlant','modalPlant'].forEach(id => {
