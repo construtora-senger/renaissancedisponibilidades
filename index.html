@@ -239,7 +239,7 @@
 
     .availability-counter{
       display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
+      grid-template-columns:repeat(2,minmax(0,1fr));
       gap:10px;
       margin:12px 0 14px;
     }
@@ -2213,7 +2213,7 @@
     /* Correção mobile: evita amontoamento de texto e números nos contadores */
     @media (max-width:760px){
       .availability-counter{
-        grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
         gap:8px !important;
         margin:12px 0 14px !important;
       }
@@ -2297,7 +2297,6 @@
 
           <div class="availability-counter" aria-label="Resumo de disponibilidade">
             <div class="availability-counter__item available"><span class="availability-counter__label">Disponíveis</span><strong class="availability-counter__value" id="countAvailable">0</strong></div>
-            <div class="availability-counter__item reserved"><span class="availability-counter__label">Reservadas</span><strong class="availability-counter__value" id="countReserved">0</strong></div>
             <div class="availability-counter__item sold"><span class="availability-counter__label">Vendidas</span><strong class="availability-counter__value" id="countSold">0</strong></div>
           </div>
 
