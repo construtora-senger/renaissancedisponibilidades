@@ -2271,7 +2271,7 @@
         <div class="hero-content">
           <img class="hero-logo" src="logo-renaissance.png" alt="Renaissance Senger">
           <div class="hero-kicker">Disponibilidade</div>
-          <div class="hero-date-inline">Atualizado em 05/05/2026 · Valores e disponibilidade sujeitos a alteração</div>
+          <div class="hero-date-inline">Atualizado em <span id="lastUpdated">hoje</span> · Valores e disponibilidade sujeitos a alteração</div>
           
         </div>
         <a class="btn-back-presentation" href="https://construtora-senger.github.io/renaissanceapresentacao/">← Apresentação</a>
@@ -2745,6 +2745,16 @@
     });
 
     updateAvailabilityCounter();
+
+    (function setLastUpdated(){
+      const el = document.getElementById('lastUpdated');
+      if(!el) return;
+      const d = new Date();
+      const dd = String(d.getDate()).padStart(2,'0');
+      const mm = String(d.getMonth()+1).padStart(2,'0');
+      const yyyy = d.getFullYear();
+      el.textContent = `${dd}/${mm}/${yyyy}`;
+    })();
   </script>
 </body>
 </html>
