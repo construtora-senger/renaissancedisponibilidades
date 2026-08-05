@@ -142,34 +142,6 @@
       box-shadow:var(--shadow);
     }
     .tower-card{padding:20px 20px 18px;overflow:hidden;min-width:0}
-    .tower-tabs{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-bottom:18px;
-      justify-content:center;
-    }
-    .tower-tab{
-      padding:15px 18px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:#fffaf3;
-      cursor:pointer;
-      font-size:12px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      font-weight:700;
-      color:var(--muted);
-      transition:.22s;
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.55);
-    }
-    .tower-tab.active{
-      background:linear-gradient(135deg,#18120d,#2a1d13);
-      border-color:#a67b37;
-      color:#fff3de;
-      box-shadow:0 10px 24px rgba(110,76,28,.20), inset 0 0 0 1px rgba(255,214,147,.28);
-    }
-
     .tower-panel{display:none;min-width:0}
     .tower-panel.active{display:block}
     .tower-drawing{
@@ -235,46 +207,6 @@
     }
     .lg{display:flex;align-items:center;gap:8px}
     .dot{width:12px;height:12px;border-radius:50%}
-
-
-    .availability-counter{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:10px;
-      margin:12px 0 14px;
-    }
-    .availability-counter__item{
-      border:1px solid rgba(184,138,74,.22);
-      border-radius:16px;
-      padding:11px 12px;
-      background:rgba(255,255,255,.46);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.62);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:8px;
-      min-width:0;
-    }
-    .availability-counter__label{
-      font-size:10px;
-      line-height:1.15;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:#786755;
-      font-weight:800;
-    }
-    .availability-counter__value{
-      font-size:24px;
-      line-height:1;
-      font-weight:900;
-      color:#17100b;
-      letter-spacing:-.04em;
-      font-family:Georgia,'Times New Roman',serif;
-    }
-    .availability-counter__item.available{border-color:rgba(47,138,76,.30)}
-    .availability-counter__item.reserved{border-color:rgba(184,138,74,.34)}
-    .availability-counter__item.sold{border-color:rgba(178,80,89,.28)}
-
     .btn-back-presentation{
       position:absolute;
       right:28px;
@@ -431,10 +363,7 @@
       .hero-text{font-size:14px;max-width:240px;line-height:1.42}
       .hero-date{font-size:10px;right:16px;bottom:12px;max-width:185px}
       .btn-back-presentation{right:14px;bottom:12px;padding:8px 10px;font-size:8px;letter-spacing:.08em}
-      .tower-card{padding:16px 10px 18px}
-      .tower-tabs{grid-template-columns:1fr;gap:10px}
-      .tower-tab{width:100%;min-width:0;padding:12px 10px;font-size:11px;letter-spacing:.08em;line-height:1.2;text-align:center}
-      .floor-label{width:24px;flex-basis:24px;padding-right:2px;font-size:10px}
+      .tower-card{padding:16px 10px 18px}      .floor-label{width:24px;flex-basis:24px;padding-right:2px;font-size:10px}
       .tower-drawing{--tower-wide-unit:min(33vw,112px);--tower-narrow-unit:min(26vw,88px)}
       .tower-unit{height:48px;border-radius:12px;font-size:clamp(13px,3.4vw,16px)}
       .tower-unit.unit-merged{width:min(64vw,220px)!important;min-width:min(64vw,220px)!important;max-width:min(64vw,220px)!important}
@@ -621,32 +550,6 @@
       background:linear-gradient(90deg, transparent, #d0ad73 18%, #b88a4a 50%, #d0ad73 82%, transparent) !important;
       opacity:.95 !important;
     }
-
-    .tower-tabs{
-      padding:8px !important;
-      background:rgba(35,24,18,.08) !important;
-      border:1px solid rgba(184,138,74,.24) !important;
-      border-radius:999px !important;
-    }
-
-    .tower-tab{
-      height:42px !important;
-      border-radius:999px !important;
-      font-size:10.5px !important;
-      letter-spacing:.12em !important;
-      color:#6c5948 !important;
-      background:rgba(255,255,255,.45) !important;
-      border:1px solid rgba(184,138,74,.22) !important;
-      box-shadow:none !important;
-    }
-
-    .tower-tab.active{
-      color:#fff3dd !important;
-      background:linear-gradient(135deg,#1a100b 0%,#3a271b 62%,#b88a4a 160%) !important;
-      border-color:rgba(208,173,115,.65) !important;
-      box-shadow:0 12px 28px rgba(53,33,18,.22) !important;
-    }
-
     .tower-stack{
       transform:scale(.94);
       transform-origin:top center;
@@ -808,15 +711,7 @@
       .tower-card,
       .side-panel{
         border-radius:20px !important;
-      }
-      .tower-tabs{
-        padding:6px !important;
-      }
-      .tower-tab{
-        height:38px !important;
-        font-size:9px !important;
-      }
-      .tower-stack{
+      }      .tower-stack{
         transform:scale(.90);
         margin-bottom:-70px !important;
       }
@@ -886,18 +781,6 @@
     .tower-card{
       padding-bottom:12px !important;
     }
-
-    .tower-tabs{
-      padding:6px !important;
-      margin-bottom:12px !important;
-    }
-
-    .tower-tab{
-      height:38px !important;
-      font-size:9.5px !important;
-      letter-spacing:.105em !important;
-    }
-
     .tower-stack{
       transform:scale(.89) !important;
       margin-bottom:-78px !important;
@@ -1046,18 +929,6 @@
       .side-panel{
         border-radius:17px !important;
       }
-
-      .tower-tabs{
-        padding:5px !important;
-        margin-bottom:8px !important;
-      }
-
-      .tower-tab{
-        height:34px !important;
-        font-size:8px !important;
-        letter-spacing:.08em !important;
-      }
-
       .tower-stack{
         transform:scale(.82) !important;
         margin-bottom:-128px !important;
@@ -1508,8 +1379,6 @@
     }
   </style>
 
-
-
   <style id="correcao-final-estabilidade-layout">
     /* =========================================================
        CORREÇÃO FINAL - ESTABILIDADE RENAISSANCE
@@ -1551,22 +1420,6 @@
     .side-panel::before {
       margin: 0 0 10px 0 !important;
     }
-
-    .tower-tabs {
-      margin: 0 0 12px !important;
-      padding: 6px !important;
-      display: grid !important;
-      grid-template-columns: 1fr 1fr !important;
-    }
-
-    .tower-tab {
-      min-width: 0 !important;
-      height: 38px !important;
-      padding: 0 14px !important;
-      white-space: normal !important;
-      line-height: 1.15 !important;
-    }
-
     .tower-panel {
       min-width: 0 !important;
       width: 100% !important;
@@ -1826,20 +1679,6 @@
         padding: 8px 6px 9px !important;
         border-radius: 17px !important;
       }
-
-      .tower-tabs {
-        grid-template-columns: 1fr !important;
-        gap: 6px !important;
-        margin-bottom: 8px !important;
-        border-radius: 18px !important;
-      }
-
-      .tower-tab {
-        height: 34px !important;
-        font-size: 8px !important;
-        letter-spacing: .08em !important;
-      }
-
       .tower-drawing {
         --tower-wide-unit: min(30.5vw, 96px) !important;
         --tower-narrow-unit: min(25vw, 78px) !important;
@@ -1935,51 +1774,6 @@
         border-radius: 0 !important;
       }
     }
-
-    /* Orientação clara para corretores: consultar preço e detalhes */
-    .use-hint {
-      display: flex !important;
-      align-items: center !important;
-      gap: 11px !important;
-      margin: 0 0 12px !important;
-      padding: 12px 14px !important;
-      border-radius: 16px !important;
-      background:
-        linear-gradient(135deg, rgba(184,138,74,.16), rgba(255,255,255,.48)),
-        rgba(255,255,255,.42) !important;
-      border: 1px solid rgba(184,138,74,.35) !important;
-      color: #2a2018 !important;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.62), 0 10px 24px rgba(58,36,18,.08) !important;
-    }
-
-    .use-hint__icon {
-      width: 34px !important;
-      height: 34px !important;
-      flex: 0 0 34px !important;
-      display: inline-flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      border-radius: 50% !important;
-      background: linear-gradient(135deg,#a97836,#d0ad73) !important;
-      color: #17100b !important;
-      font-weight: 900 !important;
-      font-size: 18px !important;
-      box-shadow: 0 8px 18px rgba(132,88,37,.20) !important;
-    }
-
-    .use-hint__text {
-      font-size: 12.5px !important;
-      line-height: 1.35 !important;
-      color: #5d4d3f !important;
-    }
-
-    .use-hint__text strong {
-      display: block !important;
-      color: #1b1511 !important;
-      font-size: 13px !important;
-      margin-bottom: 2px !important;
-    }
-
     .panel-helper {
       margin: 8px 0 0 !important;
       padding: 9px 11px !important;
@@ -2030,28 +1824,6 @@
     }
 
     @media (max-width: 760px) {
-      .use-hint {
-        gap: 9px !important;
-        margin-bottom: 9px !important;
-        padding: 10px 11px !important;
-        border-radius: 14px !important;
-      }
-
-      .use-hint__icon {
-        width: 30px !important;
-        height: 30px !important;
-        flex-basis: 30px !important;
-        font-size: 16px !important;
-      }
-
-      .use-hint__text {
-        font-size: 11px !important;
-      }
-
-      .use-hint__text strong {
-        font-size: 11.5px !important;
-      }
-
       .tower-unit[data-unit]::after,
       .podium-unit[data-unit]::after {
         display: none !important;
@@ -2207,59 +1979,109 @@
     }
   </style>
 
-
-
   <style id="ajuste-mobile-contadores-disponibilidade">
     /* Correção mobile: evita amontoamento de texto e números nos contadores */
-    @media (max-width:760px){
-      .availability-counter{
-        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-        gap:8px !important;
-        margin:12px 0 14px !important;
-      }
-      .availability-counter__item{
-        min-height:72px !important;
-        padding:10px 5px 9px !important;
-        border-radius:15px !important;
-        display:flex !important;
-        flex-direction:column !important;
-        align-items:center !important;
-        justify-content:center !important;
-        gap:5px !important;
-        text-align:center !important;
-        overflow:hidden !important;
-      }
-      .availability-counter__label{
-        width:100% !important;
-        display:block !important;
-        font-size:9px !important;
-        line-height:1.05 !important;
-        letter-spacing:.13em !important;
-        white-space:normal !important;
-        word-break:normal !important;
-        overflow-wrap:normal !important;
-      }
-      .availability-counter__value{
-        width:100% !important;
-        display:block !important;
-        font-size:28px !important;
-        line-height:.95 !important;
-        letter-spacing:-.04em !important;
-        text-align:center !important;
-      }
+
+  </style>
+
+  <style id="tipologia-barra-segmentada">
+    /* =========================================================
+       SELETOR DE TIPOLOGIA - barra segmentada premium
+       Substitui todo o CSS anterior de .tower-tabs / .tower-tab
+       ========================================================= */
+    .typology-picker{
+      margin:0 0 20px;
+      width:100%;
+      min-width:0;
+    }
+    .typology-picker__title{
+      margin:0 0 12px;
+      font-size:clamp(12px,1.4vw,14px);
+      font-weight:800;
+      letter-spacing:.20em;
+      text-transform:uppercase;
+      color:#3a2a1c;
+      text-align:center;
+    }
+    .typology-picker__hint{
+      margin:12px 0 0;
+      font-size:clamp(11.5px,1.2vw,13px);
+      line-height:1.45;
+      color:#7a6553;
+      text-align:center;
     }
 
-    @media (max-width:390px){
-      .availability-counter{gap:6px !important}
-      .availability-counter__item{
-        min-height:68px !important;
-        padding:9px 4px 8px !important;
-      }
-      .availability-counter__label{
-        font-size:8px !important;
-        letter-spacing:.11em !important;
-      }
-      .availability-counter__value{font-size:26px !important}
+    .tower-tabs{
+      position:relative;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      width:100%;
+      min-width:0;
+      height:68px;
+      padding:6px;
+      border-radius:22px;
+      background:#f4ece0;
+      border:1px solid rgba(184,138,74,.28);
+      box-shadow:0 6px 18px rgba(58,38,16,.10), inset 0 1px 0 rgba(255,255,255,.7);
+      isolation:isolate;
+    }
+    .tower-tabs__thumb{
+      position:absolute;
+      top:6px;
+      left:6px;
+      width:calc(50% - 6px);
+      height:calc(100% - 12px);
+      border-radius:17px;
+      background:linear-gradient(135deg,#211710,#3a271b);
+      box-shadow:0 8px 20px rgba(33,23,16,.28);
+      transform:translateX(0);
+      transition:transform 200ms ease;
+      z-index:0;
+      pointer-events:none;
+    }
+    .tower-tabs[data-active="1"] .tower-tabs__thumb{transform:translateX(100%)}
+
+    .tower-tab{
+      position:relative;
+      z-index:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-width:0;
+      min-height:48px;
+      height:100%;
+      padding:0 14px;
+      border:0;
+      background:transparent;
+      border-radius:17px;
+      cursor:pointer;
+      font-size:clamp(11px,1.15vw,13px);
+      font-weight:700;
+      letter-spacing:.10em;
+      line-height:1.2;
+      text-transform:uppercase;
+      text-align:center;
+      white-space:normal;
+      color:#6c5948;
+      transition:color 200ms ease;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .tower-tab:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+    .tower-tab.active{color:#fff}
+
+    @media (max-width:900px){
+      .typology-picker{margin-bottom:16px}
+      .tower-tabs{height:64px;border-radius:20px}
+      .tower-tabs__thumb{border-radius:15px}
+      .tower-tab{border-radius:15px;letter-spacing:.08em}
+    }
+    @media (max-width:520px){
+      .typology-picker__title{letter-spacing:.16em;margin-bottom:10px}
+      .typology-picker__hint{margin-top:10px}
+      .tower-tabs{height:60px;padding:5px;border-radius:18px}
+      .tower-tabs__thumb{top:5px;left:5px;width:calc(50% - 5px);height:calc(100% - 10px);border-radius:14px}
+      .tower-tab{min-height:48px;padding:0 8px;font-size:11px;letter-spacing:.06em;border-radius:14px}
+      .tower-tab__prefix{display:none}
     }
   </style>
 
@@ -2281,24 +2103,16 @@
     <section id="unidades">
       <div class="tower-wrap">
         <div class="tower-card">
-          <div class="tower-tabs">
-            <button class="tower-tab active" data-target="tower-3">Apartamentos 3 suítes</button>
-            <button class="tower-tab" data-target="tower-2">Apartamentos 2 suítes</button>
-          </div>
-
-
-          <div class="use-hint" role="note" aria-label="Como consultar valores das unidades">
-            <span class="use-hint__icon">R$</span>
-            <div class="use-hint__text">
-              <strong>Para consultar, clique no número da unidade.</strong>
-              A ficha abre com valor, área privativa, área global, status e plantas disponíveis.
+          <div class="typology-picker">
+            <h2 class="typology-picker__title">Escolha a tipologia</h2>
+            <div class="tower-tabs" data-active="0" role="tablist" aria-label="Tipologia de apartamentos">
+              <span class="tower-tabs__thumb" aria-hidden="true"></span>
+              <button class="tower-tab active" data-target="tower-3" role="tab" aria-selected="true"><span class="tower-tab__prefix">Apartamentos&nbsp;</span>3 suítes</button>
+              <button class="tower-tab" data-target="tower-2" role="tab" aria-selected="false"><span class="tower-tab__prefix">Apartamentos&nbsp;</span>2 suítes</button>
             </div>
+            <p class="typology-picker__hint">Selecione a tipologia para visualizar as unidades disponíveis.</p>
           </div>
 
-          <div class="availability-counter" aria-label="Resumo de disponibilidade">
-            <div class="availability-counter__item available"><span class="availability-counter__label">Disponíveis</span><strong class="availability-counter__value" id="countAvailable">0</strong></div>
-            <div class="availability-counter__item sold"><span class="availability-counter__label">Vendidas</span><strong class="availability-counter__value" id="countSold">0</strong></div>
-          </div>
 
           <div class="tower-panel active" id="tower-3">
             <div class="tower-drawing">
@@ -2582,6 +2396,12 @@
         document.querySelectorAll('.tower-panel').forEach(p => p.classList.remove('active'));
         btn.classList.add('active');
         document.getElementById(btn.dataset.target).classList.add('active');
+        const tabsWrap = btn.closest('.tower-tabs');
+        if(tabsWrap){
+          const tabs = Array.from(tabsWrap.querySelectorAll('.tower-tab'));
+          tabsWrap.dataset.active = String(tabs.indexOf(btn));
+          tabs.forEach(t => t.setAttribute('aria-selected', t.classList.contains('active') ? 'true' : 'false'));
+        }
       });
     });
 
